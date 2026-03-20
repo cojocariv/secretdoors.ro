@@ -6,6 +6,7 @@ const DB_PORT = '5432';
 const DB_NAME = 'secretdb';
 const DB_USER = 'admindb';
 const DB_PASS = 'AAD1sup@$$';
+const DB_DRIVER = 'pgsql';
 
 const BASE_URL = '/temp';
 const SITE_NAME = 'Secret Doors Premium';
