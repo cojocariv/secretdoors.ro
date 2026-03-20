@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-const DB_HOST = '127.0.0.1';
+const DB_HOST = 'localhost';
 const DB_PORT = '5432';
 const DB_NAME = 'secretdb';
 const DB_USER = 'admindb';
