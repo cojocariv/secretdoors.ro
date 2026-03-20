@@ -2,15 +2,15 @@
 declare(strict_types=1);
 
 const DB_HOST = '127.0.0.1';
-const DB_PORT = '3306';
-const DB_NAME = 'secretdoors';
-const DB_USER = 'root';
-const DB_PASS = '';
+const DB_PORT = '5432';
+const DB_NAME = 'secretdb';
+const DB_USER = 'admindb';
+const DB_PASS = 'AAD1sup@$$';
 
 const BASE_URL = '';
 const SITE_NAME = 'Secret Doors Premium';
 const ADMIN_USER = 'admin';
-const ADMIN_PASS = 'admin123';
+const ADMIN_PASS = 'AAD1sup@$$';
 
 $GLOBALS['site_contact'] = [
     'phone' => '0740992551',
