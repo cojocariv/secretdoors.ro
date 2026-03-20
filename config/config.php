@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 const DB_HOST = 'localhost';
 const DB_PORT = '5432';
-const DB_NAME = 'secretdb';
-const DB_USER = 'admindb';
-const DB_PASS = 'AAD1sup@$$';
-const DB_DRIVER = 'pgsql';
+const DB_NAME = 'secretdo_';
+const DB_USER = 'admin1234';
+const DB_PASS = 'xr$W3!Un5Rjusnj6';
+const DB_DRIVER = 'mysql';
 
 const BASE_URL = '/temp';
 const SITE_NAME = 'Secret Doors Premium';
