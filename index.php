@@ -3,17 +3,17 @@ declare(strict_types=1);
 
 session_start();
 
-require_once __DIR__ . '/../config/config.php';
-require_once __DIR__ . '/../core/Database.php';
-require_once __DIR__ . '/../core/Model.php';
-require_once __DIR__ . '/../core/Controller.php';
-require_once __DIR__ . '/../core/Router.php';
-require_once __DIR__ . '/../core/helpers.php';
+require_once __DIR__ . '/config/config.php';
+require_once __DIR__ . '/core/Database.php';
+require_once __DIR__ . '/core/Model.php';
+require_once __DIR__ . '/core/Controller.php';
+require_once __DIR__ . '/core/Router.php';
+require_once __DIR__ . '/core/helpers.php';
 
 spl_autoload_register(static function (string $class): void {
     $paths = [
-        __DIR__ . '/../app/Controllers/' . $class . '.php',
-        __DIR__ . '/../app/Models/' . $class . '.php',
+        __DIR__ . '/app/Controllers/' . $class . '.php',
+        __DIR__ . '/app/Models/' . $class . '.php',
     ];
 
     foreach ($paths as $path) {
@@ -55,4 +55,9 @@ $router->get('/admin/articole', [AdminController::class, 'articles']);
 $router->post('/admin/articole/save', [AdminController::class, 'saveArticle']);
 $router->post('/admin/articole/delete', [AdminController::class, 'deleteArticle']);
 
-$router->dispatch($_SERVER['REQUEST_METHOD'], parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '/');
+$requestPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '/';
+$basePath = rtrim(BASE_URL, '/');
+if ($basePath !== '' && str_starts_with($requestPath, $basePath)) {
+    $requestPath = substr($requestPath, strlen($basePath)) ?: '/';
+}
+$router->dispatch($_SERVER['REQUEST_METHOD'], $requestPath);

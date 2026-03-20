@@ -7,7 +7,7 @@ const DB_NAME = 'secretdb';
 const DB_USER = 'admindb';
 const DB_PASS = 'AAD1sup@$$';
 
-const BASE_URL = '';
+const BASE_URL = '/temp';
 const SITE_NAME = 'Secret Doors Premium';
 const ADMIN_USER = 'admin';
 const ADMIN_PASS = 'AAD1sup@$$';
