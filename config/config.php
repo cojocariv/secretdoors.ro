@@ -1,6 +1,20 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * Rădăcină proiect (folderul care conține app/, assets/, config/, core/).
+ * Folosit pentru căi către assets pe disc.
+ */
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', dirname(__DIR__));
+}
+
+/**
+ * Opțional: URL absolut către logo (ex. '/temp/assets/logo/logo.png').
+ * Lasă gol ca să se detecteze automat fișierul din assets/logo.
+ */
+const LOGO_URL = '';
+
 const DB_HOST = 'localhost';
 const DB_PORT = '5432';
 const DB_NAME = 'secretdo_';

@@ -22,11 +22,19 @@ function is_admin(): bool
 }
 
 /**
+ * Rădăcină proiect (compatibil dacă ROOT_PATH e definit în config).
+ */
+function project_root(): string
+{
+    return defined('ROOT_PATH') ? ROOT_PATH : dirname(__DIR__);
+}
+
+/**
  * Foldere posibile pentru assets/logo (rădăcină proiect și /public pentru deploy).
  */
 function assets_logo_directories(): array
 {
-    $root = dirname(__DIR__);
+    $root = project_root();
     return [
         $root . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'logo',
         $root . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'logo',
@@ -35,19 +43,37 @@ function assets_logo_directories(): array
 
 /**
  * URL public pentru logo header (primul fișier găsit pe disc).
- * Ordine: PNG preferat (ex. temp/assets/logo/logo.png), apoi webp, svg.
+ * Ordine: PNG preferat (ex. assets/logo/logo.png), apoi webp, svg.
  */
 function logo_asset_url(): string
 {
+    if (defined('LOGO_URL') && LOGO_URL !== '') {
+        return LOGO_URL;
+    }
+
     $files = ['logo.png', 'logo.webp', 'logo.svg', 'logo@2x.png'];
     foreach (assets_logo_directories() as $dir) {
+        if (!is_dir($dir)) {
+            continue;
+        }
         foreach ($files as $file) {
             $path = $dir . DIRECTORY_SEPARATOR . $file;
             if (is_file($path)) {
-                return url('/assets/logo/' . $file);
+                return url('/assets/logo/' . rawurlencode($file));
+            }
+        }
+        // Variante de nume pe sisteme case-sensitive (ex. Logo.PNG)
+        foreach (glob($dir . DIRECTORY_SEPARATOR . 'logo.*') ?: [] as $path) {
+            if (is_file($path)) {
+                $base = basename($path);
+                $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+                if (in_array($ext, ['png', 'webp', 'svg', 'jpg', 'jpeg', 'gif'], true)) {
+                    return url('/assets/logo/' . rawurlencode($base));
+                }
             }
         }
     }
+
     return url('/assets/logo/logo.png');
 }
 
@@ -83,7 +109,7 @@ function render_favicon_tags(): void
 function assets_folder_paths(string $relativeFolder): array
 {
     $relativeFolder = trim(str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $relativeFolder), DIRECTORY_SEPARATOR);
-    $root = dirname(__DIR__);
+    $root = project_root();
     return [
         $root . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $relativeFolder,
         $root . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $relativeFolder,
