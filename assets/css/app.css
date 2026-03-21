@@ -1,4 +1,89 @@
 html { scroll-behavior: smooth; }
+
+/* Brand header — logo + SECRETDOORS (font Syne), animație la încărcare */
+.brand-logo-img {
+  opacity: 0;
+  animation: brandLogoReveal 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform-origin: left center;
+}
+
+@keyframes brandLogoReveal {
+  0% {
+    opacity: 0;
+    transform: translateX(-18px) scale(0.94);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.brand-wordmark-inner {
+  font-family: 'Syne', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.15rem, 3.2vw, 1.85rem);
+  letter-spacing: 0.04em;
+  color: #fafafa;
+  opacity: 0;
+  display: inline-block;
+  animation: brandWordReveal 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.14s forwards;
+}
+
+@keyframes brandWordReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+    letter-spacing: 0.35em;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    letter-spacing: 0.04em;
+  }
+}
+
+.brand-wordmark-inner .text-accent {
+  background: linear-gradient(135deg, #d4b87c 0%, #c7a76a 45%, #a68b4a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-reveal {
+  opacity: 0;
+  animation: navReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.35s forwards;
+}
+
+@keyframes navReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.main-site-enter {
+  opacity: 0;
+  animation: mainSiteReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.18s forwards;
+}
+
+@keyframes mainSiteReveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .animate-fadein { animation: fadeIn 1.1s ease-out; }
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
@@ -122,5 +207,16 @@ html { scroll-behavior: smooth; }
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;
+  }
+
+  .brand-logo-img,
+  .brand-wordmark-inner,
+  .nav-reveal,
+  .main-site-enter {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    letter-spacing: 0.04em !important;
   }
 }

@@ -1,24 +1,28 @@
 <header class="sticky top-0 z-50 backdrop-blur bg-zinc-950/80 border-b border-zinc-800">
     <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        <a href="<?= url('/') ?>" class="flex items-center gap-3 min-h-[40px]" title="<?= e(SITE_NAME) ?>">
+        <a href="<?= url('/') ?>" class="brand-logo-wrap group flex items-center gap-3 sm:gap-4 md:gap-5 min-h-[52px] md:min-h-[64px]" title="<?= e(SITE_NAME) ?>">
             <?php
             $logoUrl = logo_asset_url();
             $logoSvgFallback = url('/assets/logo/logo.svg');
             ?>
             <img
                 src="<?= e($logoUrl) ?>"
-                alt="<?= e(SITE_NAME) ?>"
-                class="h-10 w-auto max-h-12 max-w-[min(100%,240px)] object-contain object-left"
-                width="240"
-                height="48"
+                alt=""
+                aria-hidden="true"
+                class="brand-logo-img h-14 w-auto sm:h-[3.75rem] md:h-16 max-w-[min(100%,340px)] object-contain object-left shrink-0"
+                width="340"
+                height="68"
                 decoding="async"
                 fetchpriority="high"
                 data-fallback-svg="<?= e($logoSvgFallback) ?>"
-                onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src=this.dataset.fallbackSvg;return;}this.style.display='none';var s=this.nextElementSibling;if(s)s.classList.remove('hidden');"
+                onerror="if(!this.dataset.tried){this.dataset.tried='1';this.src=this.dataset.fallbackSvg;return;}this.style.display='none';"
             >
-            <span class="text-xl font-semibold tracking-wide hidden leading-none border-b border-accent/80 pb-0.5">SECRET DOORS</span>
+            <span class="brand-wordmark flex flex-col justify-center leading-none">
+                <span class="brand-wordmark-inner tracking-tight">SECRET<span class="text-accent">DOORS</span></span>
+            </span>
+            <span class="sr-only"><?= e(SITE_NAME) ?></span>
         </a>
-        <nav class="hidden md:flex gap-6 text-sm text-zinc-300">
+        <nav class="hidden md:flex gap-6 text-sm text-zinc-300 nav-reveal">
             <a href="<?= url('/produse') ?>">Produse</a>
             <a href="<?= url('/proiecte') ?>">Proiecte</a>
             <a href="<?= url('/despre-noi') ?>">Despre noi</a>
