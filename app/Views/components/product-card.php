@@ -14,7 +14,7 @@ $img_src = $product['display_image'] ?? $product['image_url'];
             <?php else: ?>
                 <span></span>
             <?php endif; ?>
-            <a href="<?= url('/shop/produs?id=' . (int)$product['id']) ?>" class="text-sm">Detalii</a>
+            <a href="<?= url('/produse') ?>" class="text-sm">Vezi produsele</a>
         </div>
     </div>
 </article>

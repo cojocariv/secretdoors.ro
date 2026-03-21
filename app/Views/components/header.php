@@ -19,7 +19,6 @@
             <span class="text-xl font-semibold tracking-wide hidden leading-none border-b border-accent/80 pb-0.5">SECRET DOORS</span>
         </a>
         <nav class="hidden md:flex gap-6 text-sm text-zinc-300">
-            <a href="<?= url('/shop') ?>">Shop</a>
             <a href="<?= url('/produse') ?>">Produse</a>
             <a href="<?= url('/proiecte') ?>">Proiecte</a>
             <a href="<?= url('/despre-noi') ?>">Despre noi</a>

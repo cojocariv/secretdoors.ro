@@ -3,7 +3,7 @@
         <p class="text-accent uppercase tracking-[0.3em] text-xs mb-4 animate-fadein">Premium Filomuro</p>
         <h1 class="text-4xl md:text-6xl font-semibold max-w-3xl leading-tight">Uși ascunse care definesc arhitectura modernă.</h1>
         <p class="mt-6 text-zinc-300 max-w-2xl">Design minimalist, producție precisă și finisaje premium pentru spații rezidențiale și comerciale.</p>
-        <a href="<?= url('/shop') ?>" class="inline-block mt-8 px-6 py-3 border border-accent text-accent hover:bg-accent hover:text-zinc-950 transition">Explorează colecția</a>
+        <a href="<?= url('/produse') ?>" class="inline-block mt-8 px-6 py-3 border border-accent text-accent hover:bg-accent hover:text-zinc-950 transition">Explorează colecția</a>
     </div>
     <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,_rgba(199,167,106,0.2),_transparent_45%)]"></div>
 </section>

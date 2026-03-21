@@ -27,10 +27,6 @@ spl_autoload_register(static function (string $class): void {
 $router = new Router();
 
 $router->get('/', [HomeController::class, 'index']);
-$router->get('/shop', [ShopController::class, 'index']);
-$router->get('/shop/produs', [ShopController::class, 'show']);
-$router->post('/cart/add', [ShopController::class, 'addToCart']);
-$router->post('/cart/remove', [ShopController::class, 'removeFromCart']);
 $router->get('/produse', [ProductController::class, 'index']);
 $router->get('/produse/categorie', [ProductController::class, 'category']);
 $router->get('/proiecte', [ProjectController::class, 'index']);

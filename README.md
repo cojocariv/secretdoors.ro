@@ -1,31 +1,30 @@
-# Secret Doors - Corporate + eCommerce
+# Secret Doors — site corporate
 
-Stack: PHP (MVC simplu), MySQL, HTML5, Tailwind CSS (CDN), JavaScript ES6.
+Stack: PHP (MVC simplu), MySQL/MariaDB, HTML5, Tailwind CSS (CDN), JavaScript ES6.
 
 ## Setup rapid
 
-1. Importa `database/schema.sql` si `database/seeds/mock_data.sql` in MySQL.
-2. Configureaza conexiunea in `config/config.php`.
-3. Seteaza document root catre `public/`.
-4. Activeaza `mod_rewrite` (Apache) pentru URL-uri curate.
+1. Importă `database/schema.sql` și `database/seeds/mock_data.sql` în MySQL.
+2. Configurează conexiunea în `config/config.php`.
+3. Setează document root către `public/` (sau rădăcina proiectului, varianta B).
+4. Activează `mod_rewrite` (Apache) pentru URL-uri curate.
 
 ## URL-uri principale
 
-- `/` Home
-- `/shop` Shop + filtre + cart in session
-- `/shop/produs?id=1` Detaliu produs
-- `/produse` Produse pe categorii
-- `/proiecte` Proiecte + filtru tip
-- `/noutati` Blog
-- `/contact` Formular + salvare DB
+- `/` — Acasă
+- `/produse` — Galerii (Uși ascunse, Profile, Cornișă)
+- `/proiecte` — Proiecte
+- `/noutati` — Blog
+- `/contact` — Formular + salvare în DB
 
 ## Admin
 
 - `/admin/login`
 - User: `admin`
-- Parola: `admin123`
+- Parola: vezi `config/config.php`
 
 Pagini CRUD:
+
 - `/admin/produse`
 - `/admin/proiecte`
 - `/admin/articole`
