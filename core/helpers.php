@@ -76,3 +76,61 @@ function render_favicon_tags(): void
         }
     }
 }
+
+/**
+ * Căi posibile pentru un subfolder din assets/ (ex: usi, profile, cornise).
+ */
+function assets_folder_paths(string $relativeFolder): array
+{
+    $relativeFolder = trim(str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $relativeFolder), DIRECTORY_SEPARATOR);
+    $root = dirname(__DIR__);
+    return [
+        $root . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $relativeFolder,
+        $root . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . $relativeFolder,
+    ];
+}
+
+/**
+ * Listează URL-uri publice pentru imagini din assets/{folder} (jpg, png, webp, gif).
+ *
+ * @return list<string>
+ */
+function asset_gallery_images(string $folder): array
+{
+    $extensions = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+    $found = [];
+    foreach (assets_folder_paths($folder) as $dir) {
+        if (!is_dir($dir)) {
+            continue;
+        }
+        foreach ($extensions as $ext) {
+            foreach (glob($dir . DIRECTORY_SEPARATOR . '*.' . $ext) ?: [] as $path) {
+                $found[] = basename($path);
+            }
+        }
+        if ($found !== []) {
+            break;
+        }
+    }
+    $found = array_values(array_unique($found));
+    sort($found, SORT_NATURAL | SORT_FLAG_CASE);
+
+    return array_map(static function (string $file) use ($folder) {
+        return url('/assets/' . $folder . '/' . rawurlencode($file));
+    }, $found);
+}
+
+/**
+ * URL public pentru catalog PDF în Profile (nume fișier cu spații acceptat).
+ */
+function asset_profile_catalog_pdf_url(): ?string
+{
+    $filename = 'catalog profile.pdf';
+    foreach (assets_folder_paths('profile') as $dir) {
+        $path = $dir . DIRECTORY_SEPARATOR . $filename;
+        if (is_file($path)) {
+            return url('/assets/profile/' . rawurlencode($filename));
+        }
+    }
+    return null;
+}

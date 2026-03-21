@@ -1,5 +1,5 @@
 <section class="max-w-6xl mx-auto px-4 py-12 grid md:grid-cols-2 gap-10">
-    <img src="<?= e($product['image_url']) ?>" alt="<?= e($product['name']) ?>" class="js-lightbox w-full rounded-2xl object-cover cursor-zoom-in" loading="lazy" tabindex="0" role="button" aria-label="Mareste imaginea">
+    <img src="<?= e($product['image_url']) ?>" alt="<?= e($product['name']) ?>" class="js-lightbox w-full rounded-2xl object-cover cursor-zoom-in" loading="lazy" tabindex="0" role="button" aria-label="Mărește imaginea">
     <div>
         <h1 class="text-3xl font-semibold"><?= e($product['name']) ?></h1>
         <p class="text-zinc-300 mt-4"><?= e($product['short_description']) ?></p>
@@ -9,7 +9,7 @@
         <p class="mt-6 text-zinc-400 text-sm"><?= e($product['technical_specs']) ?></p>
         <form method="post" action="<?= url('/cart/add') ?>" class="mt-6">
             <input type="hidden" name="product_id" value="<?= (int)$product['id'] ?>">
-            <button class="px-6 py-3 bg-accent text-zinc-950 rounded-lg">Adauga in cos</button>
+            <button class="px-6 py-3 bg-accent text-zinc-950 rounded-lg">Adaugă în coș</button>
         </form>
     </div>
 </section>

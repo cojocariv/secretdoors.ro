@@ -10,7 +10,7 @@
             <a href="<?= url('/produse') ?>">Produse</a>
             <a href="<?= url('/proiecte') ?>">Proiecte</a>
             <a href="<?= url('/despre-noi') ?>">Despre noi</a>
-            <a href="<?= url('/noutati') ?>">Noutati</a>
+            <a href="<?= url('/noutati') ?>">Noutăți</a>
             <a href="<?= url('/contact') ?>">Contact</a>
         </nav>
     </div>

@@ -17,7 +17,7 @@ $GLOBALS['site_contact'] = [
     'phone' => '0740992551',
     'phone_display' => '+40 740 992 551',
     'email' => 'sales@secretdoors.ro',
-    'address' => 'Bucuresti Sector 2 / Intrarea Calitatii nr. 20',
+    'address' => 'București, Sector 2 / Intrarea Calității nr. 20',
     'instagram' => 'https://www.instagram.com/secret_doors_premium/',
     'tiktok' => 'https://www.tiktok.com/@secret.doors.prem',
     'google_maps_embed' => 'https://www.google.com/maps?q=Intrarea%20Calitatii%2020%2C%20Bucuresti&output=embed',

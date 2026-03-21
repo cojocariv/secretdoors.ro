@@ -5,20 +5,25 @@ class ProductController extends Controller
 {
     public function index(): void
     {
+        $usi = asset_gallery_images('usi');
+        $profile = asset_gallery_images('profile');
+        $cornise = asset_gallery_images('cornise');
+
+        $toate = array_merge($usi, $profile, $cornise);
+
         $this->render('pages/products', [
             'title' => 'Produse',
-            'categories' => (new Category())->all(),
-            'products' => (new Product())->all(),
+            'metaDescription' => 'Uși ascunse, profile și cornișe — galerii foto și catalog.',
+            'gallery_toate' => $toate,
+            'gallery_usi' => $usi,
+            'gallery_profile' => $profile,
+            'gallery_cornise' => $cornise,
+            'profile_catalog_pdf' => asset_profile_catalog_pdf_url(),
         ]);
     }
 
     public function category(): void
     {
-        $slug = $_GET['slug'] ?? '';
-        $this->render('pages/products', [
-            'title' => 'Categoria ' . $slug,
-            'categories' => (new Category())->all(),
-            'products' => (new Product())->all(['categorie' => $slug]),
-        ]);
+        $this->redirect('/produse');
     }
 }
