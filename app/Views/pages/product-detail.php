@@ -1,5 +1,5 @@
 <section class="max-w-6xl mx-auto px-4 py-12 grid md:grid-cols-2 gap-10">
-    <img src="<?= e($product['image_url']) ?>" alt="<?= e($product['name']) ?>" class="w-full rounded-2xl object-cover" loading="lazy">
+    <img src="<?= e($product['image_url']) ?>" alt="<?= e($product['name']) ?>" class="js-lightbox w-full rounded-2xl object-cover cursor-zoom-in" loading="lazy" tabindex="0" role="button" aria-label="Mareste imaginea">
     <div>
         <h1 class="text-3xl font-semibold"><?= e($product['name']) ?></h1>
         <p class="text-zinc-300 mt-4"><?= e($product['short_description']) ?></p>
