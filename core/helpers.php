@@ -166,6 +166,28 @@ function asset_gallery_images(string $folder): array
 }
 
 /**
+ * Fundal hero (homepage): imagine din assets/hero (hero.webp / hero.jpg …) sau fallback Unsplash HD.
+ */
+function hero_background_url(): string
+{
+    $priority = ['hero.webp', 'hero.jpg', 'hero.jpeg', 'hero.png'];
+    foreach (assets_folder_paths('hero') as $dir) {
+        if (!is_dir($dir)) {
+            continue;
+        }
+        foreach ($priority as $file) {
+            $path = $dir . DIRECTORY_SEPARATOR . $file;
+            if (is_file($path)) {
+                return url('/assets/hero/' . rawurlencode($file));
+            }
+        }
+    }
+
+    // Interior modern, spațiu aerisit, linii curate — potrivit pentru uși filomuro (Unsplash, 2400px)
+    return 'https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=2400&q=85';
+}
+
+/**
  * URL public pentru catalog PDF în Profile (nume fișier cu spații acceptat).
  */
 function asset_profile_catalog_pdf_url(): ?string

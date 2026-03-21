@@ -1,11 +1,34 @@
-<section class="relative min-h-[80vh] flex items-center px-4">
-    <div class="max-w-7xl mx-auto w-full">
-        <p class="text-accent uppercase tracking-[0.3em] text-xs mb-4 animate-fadein">Premium Filomuro</p>
-        <h1 class="text-4xl md:text-6xl font-semibold max-w-3xl leading-tight">Uși ascunse care definesc arhitectura modernă.</h1>
-        <p class="mt-6 text-zinc-300 max-w-2xl">Design minimalist, producție precisă și finisaje premium pentru spații rezidențiale și comerciale.</p>
-        <a href="<?= url('/produse') ?>" class="inline-block mt-8 px-6 py-3 border border-accent text-accent hover:bg-accent hover:text-zinc-950 transition">Explorează colecția</a>
+<section class="relative min-h-[92vh] flex items-center overflow-hidden">
+    <div class="absolute inset-0 -z-10" aria-hidden="true">
+        <img
+            src="<?= e(hero_background_url()) ?>"
+            alt=""
+            width="2400"
+            height="1600"
+            class="hero-bg-img absolute inset-0 h-full w-full object-cover object-[center_28%]"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            sizes="100vw"
+        >
+        <!-- Contrast pentru text: întunecare spre stânga + jos -->
+        <div class="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/80 to-zinc-950/25"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/70 via-transparent to-zinc-950/90"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(199,167,106,0.12),_transparent_55%)]"></div>
     </div>
-    <div class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,_rgba(199,167,106,0.2),_transparent_45%)]"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto w-full px-4 py-24 md:py-32">
+        <p class="text-accent uppercase tracking-[0.35em] text-xs mb-5 drop-shadow-md animate-fadein">Premium Filomuro</p>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold max-w-3xl leading-[1.12] text-white drop-shadow-[0_4px_32px_rgba(0,0,0,0.45)]">
+            Uși ascunse care definesc arhitectura modernă.
+        </h1>
+        <p class="mt-7 text-zinc-100/95 max-w-2xl text-lg leading-relaxed drop-shadow-md">
+            Design minimalist, producție precisă și finisaje premium pentru spații rezidențiale și comerciale.
+        </p>
+        <a href="<?= url('/produse') ?>" class="inline-block mt-10 px-7 py-3.5 border border-accent text-accent bg-zinc-950/40 backdrop-blur-sm hover:bg-accent hover:text-zinc-950 transition duration-300 rounded-sm font-medium shadow-lg">
+            Explorează colecția
+        </a>
+    </div>
 </section>
 
 <section class="max-w-7xl mx-auto px-4 py-16">
