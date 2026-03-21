@@ -8,12 +8,11 @@ document.querySelectorAll('a[href^="#"]').forEach((el) => {
 });
 
 /**
- * Lightbox: click sau Enter pe imagini cu .js-lightbox
+ * Lightbox cu animații intrare / ieșire
  */
 function openLightbox(src, alt) {
     const overlay = document.createElement('div');
-    overlay.className =
-        'js-lightbox-overlay fixed inset-0 z-[100] flex items-center justify-center bg-black/92 p-4';
+    overlay.className = 'js-lightbox-overlay fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6';
     overlay.setAttribute('role', 'dialog');
     overlay.setAttribute('aria-modal', 'true');
     overlay.setAttribute('aria-label', 'Imagine marita');
@@ -21,25 +20,50 @@ function openLightbox(src, alt) {
     const closeBtn = document.createElement('button');
     closeBtn.type = 'button';
     closeBtn.className =
-        'absolute top-4 right-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-zinc-800 text-2xl text-zinc-100 hover:bg-zinc-700';
+        'js-lightbox-close absolute top-3 right-3 sm:top-5 sm:right-5 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-zinc-800/95 text-2xl text-zinc-100 shadow-lg ring-1 ring-zinc-600/50 transition hover:bg-zinc-700 hover:ring-accent/40';
     closeBtn.setAttribute('aria-label', 'Inchide');
     closeBtn.innerHTML = '&times;';
+
+    const inner = document.createElement('div');
+    inner.className = 'js-lightbox-inner relative max-h-[90vh] max-w-[min(100%,96vw)]';
 
     const big = document.createElement('img');
     big.src = src;
     big.alt = alt || '';
-    big.className = 'max-h-[90vh] max-w-full object-contain shadow-2xl';
+    big.className = 'js-lightbox-img rounded-md';
     big.decoding = 'async';
 
+    inner.appendChild(big);
     overlay.appendChild(closeBtn);
-    overlay.appendChild(big);
+    overlay.appendChild(inner);
     document.body.appendChild(overlay);
     document.body.style.overflow = 'hidden';
 
+    let closed = false;
+
     function close() {
-        overlay.remove();
-        document.body.style.overflow = '';
-        document.removeEventListener('keydown', onKey);
+        if (closed) return;
+        closed = true;
+        overlay.classList.add('lb-closing');
+
+        const cleanup = () => {
+            if (!overlay.parentNode) return;
+            overlay.remove();
+            document.body.style.overflow = '';
+            document.removeEventListener('keydown', onKey);
+        };
+
+        const onEnd = (ev) => {
+            if (ev.target !== overlay || !overlay.classList.contains('lb-closing')) return;
+            overlay.removeEventListener('animationend', onEnd);
+            clearTimeout(fallback);
+            cleanup();
+        };
+        overlay.addEventListener('animationend', onEnd);
+        const fallback = setTimeout(() => {
+            overlay.removeEventListener('animationend', onEnd);
+            cleanup();
+        }, 500);
     }
 
     function onKey(ev) {

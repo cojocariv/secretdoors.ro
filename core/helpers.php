@@ -34,13 +34,12 @@ function assets_logo_directories(): array
 }
 
 /**
- * URL public pentru logo header (primul fișier găsit pe disc: svg, png, webp).
- * Dacă nu e găsit pe disc (ex. structură atipică), folosește URL-ul standard spre logo.svg
- * (browserul încarcă din DocumentRoot: /assets/logo/...).
+ * URL public pentru logo header (primul fișier găsit pe disc).
+ * Ordine: PNG preferat (ex. temp/assets/logo/logo.png), apoi webp, svg.
  */
 function logo_asset_url(): string
 {
-    $files = ['logo.svg', 'logo.png', 'logo.webp', 'logo@2x.png'];
+    $files = ['logo.png', 'logo.webp', 'logo.svg', 'logo@2x.png'];
     foreach (assets_logo_directories() as $dir) {
         foreach ($files as $file) {
             $path = $dir . DIRECTORY_SEPARATOR . $file;
@@ -49,7 +48,7 @@ function logo_asset_url(): string
             }
         }
     }
-    return url('/assets/logo/logo.svg');
+    return url('/assets/logo/logo.png');
 }
 
 /**
