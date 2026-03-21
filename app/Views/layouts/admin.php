@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($title ?? 'Admin') ?></title>
+<?php render_favicon_tags(); ?>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-zinc-100 text-zinc-900">

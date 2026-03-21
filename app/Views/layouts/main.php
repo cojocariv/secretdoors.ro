@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e(($title ?? SITE_NAME) . ' | ' . SITE_NAME) ?></title>
     <meta name="description" content="<?= e($metaDescription ?? 'Secret Doors - usi filomuro premium.') ?>">
+<?php render_favicon_tags(); ?>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
