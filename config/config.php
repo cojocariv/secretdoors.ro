@@ -10,8 +10,8 @@ if (!defined('ROOT_PATH')) {
 }
 
 /**
- * Opțional: URL absolut către logo (ex. '/temp/assets/logo/logo.png').
- * Lasă gol ca să se detecteze automat fișierul din assets/logo.
+ * Opțional: URL absolut către logo (ex. '/temp/assets/logo.svg').
+ * Lasă gol ca să se detecteze automat: întâi assets/logo.svg, apoi assets/logo/*.
  */
 const LOGO_URL = '';
 

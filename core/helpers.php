@@ -42,13 +42,32 @@ function assets_logo_directories(): array
 }
 
 /**
+ * Căi posibile pentru logo.svg plasat direct în assets/ (ex. temp/assets/logo.svg).
+ */
+function assets_logo_flat_paths(): array
+{
+    $root = project_root();
+
+    return [
+        $root . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'logo.svg',
+        $root . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'logo.svg',
+    ];
+}
+
+/**
  * URL public pentru logo header (primul fișier găsit pe disc).
- * Ordine: PNG preferat (ex. assets/logo/logo.png), apoi webp, svg.
+ * Prioritate: assets/logo.svg (la rădăina assets), apoi assets/logo/*.
  */
 function logo_asset_url(): string
 {
     if (defined('LOGO_URL') && LOGO_URL !== '') {
         return LOGO_URL;
+    }
+
+    foreach (assets_logo_flat_paths() as $path) {
+        if (is_file($path)) {
+            return url('/assets/logo.svg');
+        }
     }
 
     $files = ['logo.png', 'logo.webp', 'logo.svg', 'logo@2x.png'];
@@ -74,7 +93,7 @@ function logo_asset_url(): string
         }
     }
 
-    return url('/assets/logo/logo.png');
+    return url('/assets/logo.svg');
 }
 
 /**
