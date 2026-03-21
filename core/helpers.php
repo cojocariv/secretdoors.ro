@@ -22,26 +22,34 @@ function is_admin(): bool
 }
 
 /**
- * Cale absolută către folderul assets/logo (rădăcină proiect).
+ * Foldere posibile pentru assets/logo (rădăcină proiect și /public pentru deploy).
  */
-function assets_logo_dir(): string
+function assets_logo_directories(): array
 {
-    return dirname(__DIR__) . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'logo';
+    $root = dirname(__DIR__);
+    return [
+        $root . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'logo',
+        $root . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'logo',
+    ];
 }
 
 /**
- * URL public pentru logo header (primul fișier găsit: svg, png, webp).
+ * URL public pentru logo header (primul fișier găsit pe disc: svg, png, webp).
+ * Dacă nu e găsit pe disc (ex. structură atipică), folosește URL-ul standard spre logo.svg
+ * (browserul încarcă din DocumentRoot: /assets/logo/...).
  */
-function logo_asset_url(): ?string
+function logo_asset_url(): string
 {
-    $dir = assets_logo_dir();
-    foreach (['logo.svg', 'logo.png', 'logo.webp', 'logo@2x.png'] as $file) {
-        $path = $dir . DIRECTORY_SEPARATOR . $file;
-        if (is_file($path)) {
-            return url('/assets/logo/' . $file);
+    $files = ['logo.svg', 'logo.png', 'logo.webp', 'logo@2x.png'];
+    foreach (assets_logo_directories() as $dir) {
+        foreach ($files as $file) {
+            $path = $dir . DIRECTORY_SEPARATOR . $file;
+            if (is_file($path)) {
+                return url('/assets/logo/' . $file);
+            }
         }
     }
-    return null;
+    return url('/assets/logo/logo.svg');
 }
 
 /**
@@ -49,18 +57,23 @@ function logo_asset_url(): ?string
  */
 function render_favicon_tags(): void
 {
-    $dir = assets_logo_dir();
     $pairs = [
         ['favicon.svg', 'image/svg+xml'],
         ['favicon.ico', 'image/x-icon'],
         ['favicon.png', 'image/png'],
     ];
     foreach ($pairs as [$file, $type]) {
-        if (is_file($dir . DIRECTORY_SEPARATOR . $file)) {
-            echo '    <link rel="icon" href="' . e(url('/assets/logo/' . $file)) . '" type="' . e($type) . '">' . "\n";
+        foreach (assets_logo_directories() as $dir) {
+            if (is_file($dir . DIRECTORY_SEPARATOR . $file)) {
+                echo '    <link rel="icon" href="' . e(url('/assets/logo/' . $file)) . '" type="' . e($type) . '">' . "\n";
+                continue 2;
+            }
         }
     }
-    if (is_file($dir . DIRECTORY_SEPARATOR . 'apple-touch-icon.png')) {
-        echo '    <link rel="apple-touch-icon" href="' . e(url('/assets/logo/apple-touch-icon.png')) . '">' . "\n";
+    foreach (assets_logo_directories() as $dir) {
+        if (is_file($dir . DIRECTORY_SEPARATOR . 'apple-touch-icon.png')) {
+            echo '    <link rel="apple-touch-icon" href="' . e(url('/assets/logo/apple-touch-icon.png')) . '">' . "\n";
+            break;
+        }
     }
 }
