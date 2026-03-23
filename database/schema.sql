@@ -18,6 +18,7 @@ CREATE TABLE produse (
     finish VARCHAR(100),
     dimensions VARCHAR(100),
     image_url VARCHAR(255),
+    position INT NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (categorie_id) REFERENCES categorii(id) ON DELETE CASCADE
 );
@@ -30,6 +31,7 @@ CREATE TABLE proiecte (
     project_type ENUM('rezidential','comercial') NOT NULL,
     image_url VARCHAR(255),
     gallery_json JSON,
+    position INT NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

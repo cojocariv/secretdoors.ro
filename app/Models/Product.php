@@ -22,7 +22,16 @@ class Product extends Model
         $sql .= " ORDER BY p.created_at DESC";
         $stmt = $this->db->prepare($sql);
         $stmt->execute($params);
-        return $stmt->fetchAll();
+        $rows = $stmt->fetchAll();
+        usort($rows, static function (array $a, array $b): int {
+            $ap = (int) ($a['position'] ?? 0);
+            $bp = (int) ($b['position'] ?? 0);
+            if ($ap === $bp) {
+                return (int) ($b['id'] ?? 0) <=> (int) ($a['id'] ?? 0);
+            }
+            return $ap <=> $bp;
+        });
+        return $rows;
     }
 
     public function featured(int $limit = 3): array
@@ -30,7 +39,16 @@ class Product extends Model
         $stmt = $this->db->prepare("SELECT * FROM produse ORDER BY id DESC LIMIT :lim");
         $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll();
+        $rows = $stmt->fetchAll();
+        usort($rows, static function (array $a, array $b): int {
+            $ap = (int) ($a['position'] ?? 0);
+            $bp = (int) ($b['position'] ?? 0);
+            if ($ap === $bp) {
+                return (int) ($b['id'] ?? 0) <=> (int) ($a['id'] ?? 0);
+            }
+            return $ap <=> $bp;
+        });
+        return array_slice($rows, 0, $limit);
     }
 
     public function find(int $id): ?array

@@ -5,6 +5,7 @@ class ProductController extends Controller
 {
     public function index(): void
     {
+        $products = (new Product())->all();
         $usi = asset_gallery_images('usi');
         $profile = asset_gallery_images('profile');
         $cornise = asset_gallery_images('cornise');
@@ -19,6 +20,7 @@ class ProductController extends Controller
             'gallery_profile' => $profile,
             'gallery_cornise' => $cornise,
             'profile_catalog_pdf' => asset_profile_catalog_pdf_url(),
+            'products' => $products,
         ]);
     }
 

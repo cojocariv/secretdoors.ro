@@ -80,3 +80,18 @@
         <?php endif; ?>
     </div>
 </section>
+
+<section class="max-w-7xl mx-auto px-4 pb-16">
+    <h2 class="text-2xl font-semibold mb-2">Catalog produse</h2>
+    <p class="text-zinc-400 text-sm mb-8">Fiecare produs include denumire, descriere și preț.</p>
+    <?php if (empty($products)): ?>
+        <p class="text-zinc-500">Nu există produse configurate în cabinetul personal.</p>
+    <?php else: ?>
+        <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <?php $show_price = true; ?>
+            <?php foreach ($products as $product): ?>
+                <?php require __DIR__ . '/../components/product-card.php'; ?>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</section>
