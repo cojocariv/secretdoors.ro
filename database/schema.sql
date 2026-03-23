@@ -19,6 +19,8 @@ CREATE TABLE produse (
     dimensions VARCHAR(100),
     image_url VARCHAR(255),
     position INT NOT NULL DEFAULT 0,
+    featured_home TINYINT(1) NOT NULL DEFAULT 0,
+    featured_home_position INT NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (categorie_id) REFERENCES categorii(id) ON DELETE CASCADE
 );

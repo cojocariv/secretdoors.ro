@@ -29,6 +29,12 @@ class AdminController extends Controller
         if (!$this->hasColumn('produse', 'position')) {
             $db->exec("ALTER TABLE produse ADD COLUMN position INT NOT NULL DEFAULT 0");
         }
+        if (!$this->hasColumn('produse', 'featured_home')) {
+            $db->exec("ALTER TABLE produse ADD COLUMN featured_home TINYINT(1) NOT NULL DEFAULT 0");
+        }
+        if (!$this->hasColumn('produse', 'featured_home_position')) {
+            $db->exec("ALTER TABLE produse ADD COLUMN featured_home_position INT NOT NULL DEFAULT 0");
+        }
         if (!$this->hasColumn('proiecte', 'position')) {
             $db->exec("ALTER TABLE proiecte ADD COLUMN position INT NOT NULL DEFAULT 0");
         }
@@ -135,6 +141,8 @@ class AdminController extends Controller
             'dimensions' => $_POST['dimensions'],
             'image_url' => $_POST['image_url'],
             'position' => (int) ($_POST['position'] ?? 0),
+            'featured_home' => isset($_POST['featured_home']) ? 1 : 0,
+            'featured_home_position' => (int) ($_POST['featured_home_position'] ?? 0),
         ];
 
         if ($id > 0) {
@@ -143,14 +151,15 @@ class AdminController extends Controller
                 "UPDATE produse
                  SET categorie_id = :categorie_id, name = :name, slug = :slug, short_description = :short_description,
                      technical_specs = :technical_specs, price = :price, finish = :finish, dimensions = :dimensions,
-                     image_url = :image_url, position = :position
+                     image_url = :image_url, position = :position, featured_home = :featured_home,
+                     featured_home_position = :featured_home_position
                  WHERE id = :id"
             );
             $stmt->execute($payload);
         } else {
             $stmt = $db->prepare(
-                "INSERT INTO produse (categorie_id, name, slug, short_description, technical_specs, price, finish, dimensions, image_url, position)
-                 VALUES (:categorie_id, :name, :slug, :short_description, :technical_specs, :price, :finish, :dimensions, :image_url, :position)"
+                "INSERT INTO produse (categorie_id, name, slug, short_description, technical_specs, price, finish, dimensions, image_url, position, featured_home, featured_home_position)
+                 VALUES (:categorie_id, :name, :slug, :short_description, :technical_specs, :price, :finish, :dimensions, :image_url, :position, :featured_home, :featured_home_position)"
             );
             $stmt->execute($payload);
         }

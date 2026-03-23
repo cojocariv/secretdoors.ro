@@ -1,5 +1,6 @@
 <a href="<?= url('/admin') ?>" class="text-sm">Inapoi</a>
 <h1 class="text-2xl font-semibold mt-2 mb-4">Cabinet personal - Produse</h1>
+<p id="featured-home" class="text-sm text-zinc-600 mb-4">Bifează produsele care apar în secțiunea <strong>Produse în evidență</strong> de pe pagina principală și setează ordinea lor.</p>
 <form method="post" action="<?= url('/admin/produse/save') ?>" class="grid md:grid-cols-2 gap-3 bg-white p-4 rounded-xl shadow mb-8">
     <input type="hidden" name="id" value="">
     <select name="categorie_id" class="border rounded px-2 py-2" required>
@@ -15,6 +16,8 @@
     <input name="finish" placeholder="Finisaj" class="border rounded px-2 py-2">
     <input name="dimensions" placeholder="Dimensiuni" class="border rounded px-2 py-2">
     <input name="image_url" placeholder="URL imagine" class="border rounded px-2 py-2">
+    <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="featured_home" value="1"> Afișează pe Home (Produse în evidență)</label>
+    <input name="featured_home_position" placeholder="Ordine pe Home (0,1,2...)" type="number" min="0" class="border rounded px-2 py-2" value="0">
     <button class="bg-zinc-900 text-white px-3 py-2 rounded">Adauga produs</button>
 </form>
 
@@ -48,6 +51,8 @@
             <input name="finish" value="<?= e((string) ($item['finish'] ?? '')) ?>" class="border rounded px-2 py-2">
             <input name="dimensions" value="<?= e((string) ($item['dimensions'] ?? '')) ?>" class="border rounded px-2 py-2">
             <input name="image_url" value="<?= e((string) ($item['image_url'] ?? '')) ?>" class="border rounded px-2 py-2">
+            <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="featured_home" value="1" <?= ((int) ($item['featured_home'] ?? 0) === 1) ? 'checked' : '' ?>> Afișează pe Home (Produse în evidență)</label>
+            <input name="featured_home_position" value="<?= (int) ($item['featured_home_position'] ?? 0) ?>" type="number" min="0" class="border rounded px-2 py-2" placeholder="Ordine pe Home">
             <div class="flex gap-4 items-center">
                 <button class="bg-zinc-900 text-white px-3 py-2 rounded">Salveaza modificari</button>
             </div>

@@ -5,7 +5,11 @@ class HomeController extends Controller
 {
     public function index(): void
     {
-        $products = (new Product())->featured(4);
+        $productModel = new Product();
+        $products = $productModel->featuredForHome(4);
+        if ($products === []) {
+            $products = $productModel->featured(4);
+        }
 
         $projects = array_slice((new Project())->all(), 0, 6);
         $this->render('pages/home', [

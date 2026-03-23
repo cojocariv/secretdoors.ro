@@ -51,6 +51,14 @@ class Product extends Model
         return array_slice($rows, 0, $limit);
     }
 
+    public function featuredForHome(int $limit = 4): array
+    {
+        $stmt = $this->db->prepare("SELECT * FROM produse WHERE featured_home = 1 ORDER BY featured_home_position ASC, id DESC LIMIT :lim");
+        $stmt->bindValue(':lim', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
     public function find(int $id): ?array
     {
         $stmt = $this->db->prepare("SELECT * FROM produse WHERE id = :id");
