@@ -29,7 +29,19 @@
             </span>
             <span class="sr-only"><?= e(SITE_NAME) ?></span>
         </a>
-        <div class="flex items-center gap-3 sm:gap-4 md:gap-6">
+        <div class="flex items-center gap-2 sm:gap-4 md:gap-6">
+            <button
+                type="button"
+                class="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-zinc-300 border border-zinc-700 hover:border-accent/60 hover:text-accent transition-colors"
+                data-mobile-menu-toggle
+                aria-controls="mobile-main-menu"
+                aria-expanded="false"
+                aria-label="Deschide meniul"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                    <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" />
+                </svg>
+            </button>
             <nav class="hidden md:flex gap-6 text-sm text-zinc-300 nav-reveal">
                 <a href="<?= url('/produse') ?>">Produse</a>
                 <a href="<?= url('/proiecte') ?>">Proiecte</a>
@@ -62,5 +74,14 @@
                 </a>
             </div>
         </div>
+    </div>
+    <div id="mobile-main-menu" class="md:hidden hidden border-t border-zinc-800 bg-zinc-950/95" data-mobile-menu-panel>
+        <nav class="max-w-7xl mx-auto px-4 py-3 flex flex-col text-sm text-zinc-300">
+            <a class="py-2 border-b border-zinc-900/70" href="<?= url('/produse') ?>">Produse</a>
+            <a class="py-2 border-b border-zinc-900/70" href="<?= url('/proiecte') ?>">Proiecte</a>
+            <a class="py-2 border-b border-zinc-900/70" href="<?= url('/despre-noi') ?>">Despre noi</a>
+            <a class="py-2 border-b border-zinc-900/70" href="<?= url('/noutati') ?>">Noutăți</a>
+            <a class="py-2" href="<?= url('/contact') ?>">Contact</a>
+        </nav>
     </div>
 </header>

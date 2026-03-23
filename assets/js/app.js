@@ -122,3 +122,47 @@ document.querySelectorAll('[data-produse-tabs]').forEach((root) => {
     });
     show('toate');
 });
+
+/**
+ * Header mobil: toggle meniu
+ */
+(() => {
+    const toggle = document.querySelector('[data-mobile-menu-toggle]');
+    const panel = document.querySelector('[data-mobile-menu-panel]');
+    if (!toggle || !panel) return;
+
+    function closeMenu() {
+        panel.classList.add('hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    function openMenu() {
+        panel.classList.remove('hidden');
+        toggle.setAttribute('aria-expanded', 'true');
+    }
+
+    toggle.addEventListener('click', () => {
+        const isOpen = !panel.classList.contains('hidden');
+        if (isOpen) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    });
+
+    panel.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!(target instanceof Node)) return;
+        if (panel.classList.contains('hidden')) return;
+        if (panel.contains(target) || toggle.contains(target)) return;
+        closeMenu();
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeMenu();
+    });
+})();
