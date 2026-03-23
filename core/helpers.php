@@ -93,7 +93,7 @@ function logo_asset_url(): string
         }
     }
 
-    return url('/assets/logo.svg');
+    return url('/assets/logo/logo.svg');
 }
 
 /**
@@ -114,6 +114,11 @@ function render_favicon_tags(): void
             }
         }
     }
+    // Fallback robust dacă lipsesc favicon.* pe server:
+    // browserele moderne pot folosi SVG-ul principal de brand.
+    echo '    <link rel="icon" href="' . e(url('/assets/logo/logo.svg')) . '" type="image/svg+xml">' . "\n";
+    echo '    <link rel="shortcut icon" href="' . e(url('/assets/logo/logo.svg')) . '">' . "\n";
+
     foreach (assets_logo_directories() as $dir) {
         if (is_file($dir . DIRECTORY_SEPARATOR . 'apple-touch-icon.png')) {
             echo '    <link rel="apple-touch-icon" href="' . e(url('/assets/logo/apple-touch-icon.png')) . '">' . "\n";
