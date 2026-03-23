@@ -22,7 +22,7 @@ const DB_USER = 'admin1234';
 const DB_PASS = 'xr$W3!Un5Rjusnj6';
 const DB_DRIVER = 'mysql';
 
-const BASE_URL = '/temp';
+const BASE_URL = '';
 const SITE_NAME = 'Secret Doors Premium';
 const ADMIN_USER = 'admin';
 const ADMIN_PASS = 'AAD1sup@$$';
