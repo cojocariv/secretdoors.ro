@@ -5,22 +5,32 @@ class ProductController extends Controller
 {
     public function index(): void
     {
-        $products = (new Product())->all();
-        $usi = asset_gallery_images('usi');
-        $profile = asset_gallery_images('profile');
-        $cornise = asset_gallery_images('cornise');
+        $categoryFilters = [
+            'profile' => 'Profile',
+            'sisteme-glisante' => 'Sisteme glisante',
+            'usi-filomuro' => 'Usi filomuro',
+            'usi-invizibile' => 'Usi invizibile',
+            'cornisa' => 'Cornisa',
+        ];
 
-        $toate = array_merge($usi, $profile, $cornise);
+        $selectedCategory = (string) ($_GET['categorie'] ?? '');
+        if (!array_key_exists($selectedCategory, $categoryFilters)) {
+            $selectedCategory = '';
+        }
+
+        $filters = [];
+        if ($selectedCategory !== '') {
+            $filters['categorie'] = $selectedCategory;
+        }
+
+        $products = (new Product())->all($filters);
 
         $this->render('pages/products', [
             'title' => 'Produse',
-            'metaDescription' => 'Uși ascunse, profile și cornișe — galerii foto și catalog.',
-            'gallery_toate' => $toate,
-            'gallery_usi' => $usi,
-            'gallery_profile' => $profile,
-            'gallery_cornise' => $cornise,
-            'profile_catalog_pdf' => asset_profile_catalog_pdf_url(),
+            'metaDescription' => 'Produse Secret Doors filtrabile pe categorii.',
             'products' => $products,
+            'categoryFilters' => $categoryFilters,
+            'selectedCategory' => $selectedCategory,
         ]);
     }
 
