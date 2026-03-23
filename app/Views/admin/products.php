@@ -23,7 +23,7 @@
     <div class="bg-white p-4 rounded shadow mb-4">
         <div class="mb-4 rounded-xl border border-zinc-200 overflow-hidden">
             <?php if (!empty($item['image_url'])): ?>
-                <img src="<?= e($item['image_url']) ?>" alt="<?= e($item['name']) ?>" class="w-full h-44 object-cover">
+                <img src="<?= e(normalize_image_url((string) $item['image_url'])) ?>" alt="<?= e($item['name']) ?>" class="w-full h-44 object-cover">
             <?php else: ?>
                 <div class="w-full h-44 grid place-items-center bg-zinc-100 text-zinc-500 text-sm">Imagine indisponibilă</div>
             <?php endif; ?>

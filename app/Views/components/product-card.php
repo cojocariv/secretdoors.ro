@@ -1,7 +1,7 @@
 <?php
 /** @var array $product */
 $show_price = $show_price ?? true;
-$img_src = trim((string) ($product['display_image'] ?? $product['image_url'] ?? ''));
+$img_src = normalize_image_url(trim((string) ($product['display_image'] ?? $product['image_url'] ?? '')));
 $has_image = $img_src !== '';
 ?>
 <article class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:-translate-y-1 transition shadow-sm">

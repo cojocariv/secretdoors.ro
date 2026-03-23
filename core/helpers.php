@@ -201,3 +201,43 @@ function asset_profile_catalog_pdf_url(): ?string
     }
     return null;
 }
+
+/**
+ * Normalizează URL-uri de imagine (ex: Google Drive share link -> direct image URL).
+ */
+function normalize_image_url(string $rawUrl): string
+{
+    $rawUrl = trim($rawUrl);
+    if ($rawUrl === '') {
+        return '';
+    }
+
+    $parts = parse_url($rawUrl);
+    if ($parts === false) {
+        return $rawUrl;
+    }
+
+    $host = strtolower($parts['host'] ?? '');
+    if (!str_contains($host, 'drive.google.com')) {
+        return $rawUrl;
+    }
+
+    $path = $parts['path'] ?? '';
+    $query = $parts['query'] ?? '';
+    $fileId = '';
+
+    if ($query !== '') {
+        parse_str($query, $queryParams);
+        $fileId = (string) ($queryParams['id'] ?? '');
+    }
+
+    if ($fileId === '' && preg_match('#/file/d/([^/]+)#', $path, $matches) === 1) {
+        $fileId = $matches[1];
+    }
+
+    if ($fileId === '') {
+        return $rawUrl;
+    }
+
+    return 'https://drive.google.com/uc?export=view&id=' . rawurlencode($fileId);
+}
