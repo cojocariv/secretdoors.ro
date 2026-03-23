@@ -33,7 +33,6 @@
 
 <section class="max-w-7xl mx-auto px-4 py-16">
         <h2 class="text-2xl font-semibold mb-2">Produse în evidență</h2>
-    <p class="text-zinc-400 text-sm mb-6">Selecție din cabinetul personal: denumire, descriere și preț.</p>
     <div class="grid md:grid-cols-4 gap-6">
         <?php $show_price = true; ?>
         <?php foreach ($products as $product): ?>
