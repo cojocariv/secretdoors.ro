@@ -1,4 +1,11 @@
 <header class="sticky top-0 z-50 backdrop-blur bg-zinc-950/80 border-b border-zinc-800">
+    <div class="border-b border-zinc-900/80 bg-zinc-950/70">
+        <div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap items-center gap-x-5 gap-y-1 text-[11px] sm:text-xs text-zinc-400">
+            <span class="truncate max-w-full"><?= e(site_contact('address')) ?></span>
+            <a href="mailto:<?= e(site_contact('email')) ?>" class="hover:text-accent transition-colors"><?= e(site_contact('email')) ?></a>
+            <a href="tel:<?= e(site_contact('phone')) ?>" class="hover:text-accent transition-colors"><?= e(site_contact('phone_display')) ?></a>
+        </div>
+    </div>
     <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         <a href="<?= url('/') ?>" class="brand-logo-wrap group flex items-center gap-3 sm:gap-4 md:gap-5 min-h-[52px] md:min-h-[64px]" title="<?= e(SITE_NAME) ?>">
             <?php
