@@ -3,7 +3,9 @@ USE secretdoors;
 INSERT INTO categorii (name, slug) VALUES
 ('Usi filomuro', 'usi-filomuro'),
 ('Usi invizibile', 'usi-invizibile'),
-('Sisteme glisante', 'sisteme-glisante');
+('Sisteme glisante', 'sisteme-glisante'),
+('Profile', 'profile'),
+('Cornisa', 'cornisa');
 
 INSERT INTO produse (categorie_id, name, slug, short_description, technical_specs, price, finish, dimensions, image_url, position) VALUES
 (1, 'Filomuro Prime 230', 'filomuro-prime-230', 'Usa premium flush cu toc ascuns.', 'Cadru aluminiu, 44 dB izolare fonica.', 3290, 'Lac mat grafit', '90x230 cm', 'https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?q=80&w=1200&auto=format', 1),

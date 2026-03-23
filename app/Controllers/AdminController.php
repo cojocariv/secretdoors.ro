@@ -34,6 +34,31 @@ class AdminController extends Controller
         }
     }
 
+    private function ensureDefaultCategories(): void
+    {
+        $db = Database::getInstance();
+        $pairs = [
+            ['Usi filomuro', 'usi-filomuro'],
+            ['Usi invizibile', 'usi-invizibile'],
+            ['Sisteme glisante', 'sisteme-glisante'],
+            ['Profile', 'profile'],
+            ['Cornisa', 'cornisa'],
+        ];
+
+        $stmt = $db->prepare("INSERT INTO categorii (name, slug) VALUES (:name, :slug)");
+        foreach ($pairs as [$name, $slug]) {
+            $exists = $db->prepare("SELECT id FROM categorii WHERE slug = :slug LIMIT 1");
+            $exists->execute(['slug' => $slug]);
+            if ($exists->fetchColumn()) {
+                continue;
+            }
+            $stmt->execute([
+                'name' => $name,
+                'slug' => $slug,
+            ]);
+        }
+    }
+
     private function guard(): void
     {
         if (!is_admin()) {
@@ -72,6 +97,7 @@ class AdminController extends Controller
     {
         $this->guard();
         $this->ensurePositionColumns();
+        $this->ensureDefaultCategories();
         $this->render('admin/products', [
             'title' => 'Admin Produse',
             'products' => (new Product())->all(),
