@@ -1,0 +1,37 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Logs / temp
+*.log
+logs/
+tmp/
+temp/
+
+# Dependencies / build artifacts
+vendor/
+node_modules/
+dist/
+build/
+
+# Runtime / cache / uploads (optional)
+storage/cache/
+storage/sessions/
+storage/logs/
+uploads/
+
+# Archives / backups
+*.zip
+*.tar
+*.tar.gz
+*.bak
+
+# Project-specific
+/assets/logo.svg
