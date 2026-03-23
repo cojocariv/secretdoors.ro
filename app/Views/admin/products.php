@@ -21,6 +21,18 @@
 <h2 class="text-lg font-semibold mb-3">Pozitii existente</h2>
 <?php foreach ($products as $item): ?>
     <div class="bg-white p-4 rounded shadow mb-4">
+        <div class="mb-4 rounded-xl border border-zinc-200 overflow-hidden">
+            <?php if (!empty($item['image_url'])): ?>
+                <img src="<?= e($item['image_url']) ?>" alt="<?= e($item['name']) ?>" class="w-full h-44 object-cover">
+            <?php else: ?>
+                <div class="w-full h-44 grid place-items-center bg-zinc-100 text-zinc-500 text-sm">Imagine indisponibilă</div>
+            <?php endif; ?>
+            <div class="p-4">
+                <p class="font-semibold text-zinc-900"><?= e($item['name']) ?></p>
+                <p class="text-sm text-zinc-600 mt-1"><?= e($item['short_description']) ?></p>
+                <p class="text-sm font-semibold text-zinc-900 mt-2"><?= number_format((float) $item['price'], 0, ',', '.') ?> RON</p>
+            </div>
+        </div>
         <form method="post" action="<?= url('/admin/produse/save') ?>" class="grid md:grid-cols-2 gap-3">
             <input type="hidden" name="id" value="<?= (int) $item['id'] ?>">
             <select name="categorie_id" class="border rounded px-2 py-2" required>
