@@ -3,17 +3,19 @@ declare(strict_types=1);
 
 session_start();
 
-require_once __DIR__ . '/config/config.php';
-require_once __DIR__ . '/core/Database.php';
-require_once __DIR__ . '/core/Model.php';
-require_once __DIR__ . '/core/Controller.php';
-require_once __DIR__ . '/core/Router.php';
-require_once __DIR__ . '/core/helpers.php';
+$rootPath = dirname(__DIR__);
 
-spl_autoload_register(static function (string $class): void {
+require_once $rootPath . '/config/config.php';
+require_once $rootPath . '/core/Database.php';
+require_once $rootPath . '/core/Model.php';
+require_once $rootPath . '/core/Controller.php';
+require_once $rootPath . '/core/Router.php';
+require_once $rootPath . '/core/helpers.php';
+
+spl_autoload_register(static function (string $class) use ($rootPath): void {
     $paths = [
-        __DIR__ . '/app/Controllers/' . $class . '.php',
-        __DIR__ . '/app/Models/' . $class . '.php',
+        $rootPath . '/app/Controllers/' . $class . '.php',
+        $rootPath . '/app/Models/' . $class . '.php',
     ];
 
     foreach ($paths as $path) {

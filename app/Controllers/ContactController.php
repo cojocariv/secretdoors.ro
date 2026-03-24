@@ -81,82 +81,212 @@ class ContactController extends Controller
 
     private function sendViaSmtp(string $from, string $to, string $subject, string $body, string $replyTo): bool
     {
-        if (!defined('SMTP_HOST') || trim((string) SMTP_HOST) === '') {
-            $this->mailLastError = '(SMTP_HOST lipsă)';
+        $host = $this->smtpConfigString('SMTP_HOST');
+        $username = $this->smtpConfigString('SMTP_USERNAME');
+        $password = $this->smtpConfigString('SMTP_PASSWORD');
+
+        if ($host === '') {
+            $this->mailLastError = '(SMTP_HOST lipsă — completează config/config.php sau variabila de mediu SMTP_HOST)';
             return false;
         }
-        if (!defined('SMTP_USERNAME') || trim((string) SMTP_USERNAME) === '') {
+        if ($username === '') {
             $this->mailLastError = '(SMTP_USERNAME lipsă)';
             return false;
         }
-        if (!defined('SMTP_PASSWORD') || trim((string) SMTP_PASSWORD) === '') {
+        if ($password === '') {
             $this->mailLastError = '(SMTP_PASSWORD lipsă)';
             return false;
         }
 
-        $host = trim((string) SMTP_HOST);
         $port = defined('SMTP_PORT') ? (int) SMTP_PORT : 587;
-        $username = trim((string) SMTP_USERNAME);
-        $password = (string) SMTP_PASSWORD;
+        $portEnv = getenv('SMTP_PORT');
+        if ($portEnv !== false && trim((string) $portEnv) !== '') {
+            $port = (int) trim((string) $portEnv);
+        }
+
         $encryption = defined('SMTP_ENCRYPTION') ? strtolower(trim((string) SMTP_ENCRYPTION)) : 'tls';
+        $encEnv = getenv('SMTP_ENCRYPTION');
+        if ($encEnv !== false && trim((string) $encEnv) !== '') {
+            $encryption = strtolower(trim((string) $encEnv));
+        }
+
         $timeout = defined('SMTP_TIMEOUT') ? (int) SMTP_TIMEOUT : 12;
 
-        $transportHost = $encryption === 'ssl' ? 'ssl://' . $host : $host;
+        $strategies = [
+            ['encryption' => $encryption, 'port' => $port],
+        ];
+        if ($encryption === 'tls') {
+            $strategies[] = ['encryption' => 'ssl', 'port' => 465];
+        }
+        if ($encryption === 'ssl' && $port !== 587) {
+            $strategies[] = ['encryption' => 'tls', 'port' => 587];
+        }
+
+        $hostCandidates = $this->smtpHostCandidates($host);
+        $lastError = '(SMTP: toate încercările au eșuat — verifică în cPanel «Email Routing / Manual Settings» host și port)';
+        foreach ($hostCandidates as $tryHost) {
+            foreach ($strategies as $strategy) {
+                $err = '';
+                if (
+                    $this->smtpRunSession(
+                        $from,
+                        $to,
+                        $subject,
+                        $body,
+                        $replyTo,
+                        $tryHost,
+                        $username,
+                        $password,
+                        $timeout,
+                        $strategy['encryption'],
+                        (int) $strategy['port'],
+                        $err
+                    )
+                ) {
+                    return true;
+                }
+                $lastError = $err;
+            }
+        }
+
+        $this->mailLastError = $lastError;
+        return false;
+    }
+
+    /**
+     * Încearcă mai multe hostname-uri uzuale dacă SMTP_HOST e incomplet (ex. doar domeniul).
+     *
+     * @return list<string>
+     */
+    private function smtpHostCandidates(string $primary): array
+    {
+        $out = [];
+        $p = trim($primary);
+        if ($p !== '') {
+            $out[] = $p;
+        }
+
+        $domain = '';
+        if (defined('CONTACT_FORM_FROM_EMAIL') && str_contains((string) CONTACT_FORM_FROM_EMAIL, '@')) {
+            $parts = explode('@', (string) CONTACT_FORM_FROM_EMAIL, 2);
+            $domain = trim($parts[1] ?? '');
+        }
+
+        if ($domain !== '') {
+            $mailH = 'mail.' . $domain;
+            if (!in_array($mailH, $out, true)) {
+                $out[] = $mailH;
+            }
+            if ($domain !== $p && !in_array($domain, $out, true)) {
+                $out[] = $domain;
+            }
+        }
+
+        return array_values(array_unique($out));
+    }
+
+    /**
+     * @return array{0: resource|null, 1: string} socket sau null + detaliu eroare
+     */
+    private function smtpOpenStreamSocket(string $host, string $encryption, int $port, int $timeout): array
+    {
+        $encryption = strtolower($encryption);
+        $prefix = $encryption === 'ssl' ? 'ssl://' : '';
+        $target = $prefix . $host . ':' . $port;
+
+        $context = stream_context_create([
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true,
+            ],
+        ]);
+
+        $errno = 0;
+        $errstr = '';
         $socket = @stream_socket_client(
-            $transportHost . ':' . $port,
+            $target,
             $errno,
             $errstr,
             $timeout,
-            STREAM_CLIENT_CONNECT
+            STREAM_CLIENT_CONNECT,
+            $context
         );
+
+        if (is_resource($socket)) {
+            return [$socket, ''];
+        }
+
+        $detail = trim((string) $errstr);
+        if ($detail === '' && $errno === 0) {
+            $last = error_get_last();
+            if (is_array($last) && isset($last['message']) && is_string($last['message'])) {
+                $detail = trim($last['message']);
+            }
+        }
+
+        if ($detail === '') {
+            $detail = 'fără mesaj — posibil port ' . $port . ' blocat la ieșire de host, DNS greșit sau extensia OpenSSL';
+        }
+
+        $line = $detail . ' (errno ' . $errno . ') la ' . $host;
+
+        // Dacă ssl:// nu dă detaliu, încearcă tcp:// + detectare rapidă.
+        if ($encryption === 'ssl' && $errno === 0 && trim((string) $errstr) === '') {
+            $probe = @stream_socket_client(
+                'tcp://' . $host . ':' . $port,
+                $e2,
+                $s2,
+                min($timeout, 5),
+                STREAM_CLIENT_CONNECT
+            );
+            if (!is_resource($probe)) {
+                $line .= ' | probă TCP: ' . (trim((string) $s2) !== '' ? $s2 : 'fără mesaj') . ' (errno ' . $e2 . ')';
+            } else {
+                fclose($probe);
+                $line .= ' | probă TCP: conexiunea TCP reușește — verifică SSL/OpenSSL pentru ssl://';
+            }
+        }
+
+        return [null, $line];
+    }
+
+    /**
+     * O sesiune SMTP completă (o conexiune + trimitere mesaj).
+     */
+    private function smtpRunSession(
+        string $from,
+        string $to,
+        string $subject,
+        string $body,
+        string $replyTo,
+        string $host,
+        string $username,
+        string $password,
+        int $timeout,
+        string $encryption,
+        int $port,
+        string &$errorOut
+    ): bool {
+        $encryption = strtolower($encryption);
+        $ehloId = $this->smtpEhloHost();
+
+        [$socket, $connErr] = $this->smtpOpenStreamSocket($host, $encryption, $port, $timeout);
         if (!is_resource($socket)) {
-            $this->mailLastError = '(conexiune SMTP eșuată: ' . $errstr . ' #' . $errno . ')';
+            $errorOut = '(conexiune SMTP eșuată [' . $host . ' ' . $encryption . ':' . $port . '] ' . $connErr . ')';
             return false;
         }
 
         stream_set_timeout($socket, $timeout);
+        $this->mailLastError = '';
 
         try {
-            if (!$this->smtpExpect($socket, [220], $response)) {
-                $this->mailLastError = '(SMTP banner invalid: ' . $response . ')';
+            if (!$this->smtpOpenAndTls($socket, $encryption, $ehloId, $errorOut)) {
                 return false;
-            }
-            if (!$this->smtpSend($socket, 'EHLO ' . ($_SERVER['HTTP_HOST'] ?? 'localhost'))) {
-                $this->mailLastError = '(EHLO write failed)';
-                return false;
-            }
-            if (!$this->smtpExpect($socket, [250], $response)) {
-                $this->mailLastError = '(EHLO respins: ' . $response . ')';
-                return false;
-            }
-
-            if ($encryption === 'tls') {
-                if (!$this->smtpSend($socket, 'STARTTLS')) {
-                    $this->mailLastError = '(STARTTLS write failed)';
-                    return false;
-                }
-                if (!$this->smtpExpect($socket, [220], $response)) {
-                    $this->mailLastError = '(STARTTLS respins: ' . $response . ')';
-                    return false;
-                }
-                if (!@stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
-                    $this->mailLastError = '(TLS handshake eșuat)';
-                    return false;
-                }
-                if (!$this->smtpSend($socket, 'EHLO ' . ($_SERVER['HTTP_HOST'] ?? 'localhost'))) {
-                    $this->mailLastError = '(EHLO post-TLS write failed)';
-                    return false;
-                }
-                if (!$this->smtpExpect($socket, [250], $response)) {
-                    $this->mailLastError = '(EHLO post-TLS respins: ' . $response . ')';
-                    return false;
-                }
             }
 
             if (!$this->smtpAuthenticate($socket, $username, $password)) {
-                if ($this->mailLastError === '') {
-                    $this->mailLastError = '(autentificare SMTP eșuată)';
-                }
+                $errorOut = $this->mailLastError !== '' ? $this->mailLastError : '(autentificare SMTP eșuată)';
                 return false;
             }
 
@@ -168,7 +298,7 @@ class ContactController extends Controller
                 !$this->smtpSend($socket, 'DATA') ||
                 !$this->smtpExpect($socket, [354], $response)
             ) {
-                $this->mailLastError = '(SMTP envelope eșuat: ' . $response . ')';
+                $errorOut = '(SMTP envelope eșuat: ' . $response . ')';
                 return false;
             }
 
@@ -188,11 +318,11 @@ class ContactController extends Controller
             $messageData = implode("\r\n", $headers) . "\r\n\r\n" . $body;
             $messageData = str_replace(["\r\n.", "\n."], ["\r\n..", "\n.."], $messageData);
             if (!$this->smtpSendRaw($socket, $messageData . "\r\n.\r\n")) {
-                $this->mailLastError = '(SMTP DATA write failed)';
+                $errorOut = '(SMTP DATA write failed)';
                 return false;
             }
             if (!$this->smtpExpect($socket, [250], $response)) {
-                $this->mailLastError = '(SMTP DATA respins: ' . $response . ')';
+                $errorOut = '(SMTP DATA respins: ' . $response . ')';
                 return false;
             }
 
@@ -201,6 +331,73 @@ class ContactController extends Controller
         } finally {
             fclose($socket);
         }
+    }
+
+    private function smtpOpenAndTls($socket, string $encryption, string $ehloId, string &$errorOut): bool
+    {
+        if (!$this->smtpExpect($socket, [220], $response)) {
+            $errorOut = '(SMTP banner invalid: ' . $response . ')';
+            return false;
+        }
+        if (!$this->smtpSend($socket, 'EHLO ' . $ehloId)) {
+            $errorOut = '(EHLO write failed)';
+            return false;
+        }
+        if (!$this->smtpExpect($socket, [250], $response)) {
+            $errorOut = '(EHLO respins: ' . $response . ')';
+            return false;
+        }
+
+        if ($encryption === 'tls') {
+            if (!$this->smtpSend($socket, 'STARTTLS')) {
+                $errorOut = '(STARTTLS write failed)';
+                return false;
+            }
+            if (!$this->smtpExpect($socket, [220], $response)) {
+                $errorOut = '(STARTTLS respins: ' . $response . ')';
+                return false;
+            }
+            if (!@stream_socket_enable_crypto($socket, true, $this->smtpTlsClientCryptoMethods())) {
+                $errorOut = '(TLS handshake eșuat pe STARTTLS — urmează automat ssl:465)';
+                return false;
+            }
+            if (!$this->smtpSend($socket, 'EHLO ' . $ehloId)) {
+                $errorOut = '(EHLO post-TLS write failed)';
+                return false;
+            }
+            if (!$this->smtpExpect($socket, [250], $response)) {
+                $errorOut = '(EHLO post-TLS respins: ' . $response . ')';
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private function smtpEhloHost(): string
+    {
+        $http = $_SERVER['HTTP_HOST'] ?? '';
+        $http = preg_replace('/:\d+$/', '', (string) $http) ?? '';
+        if ($http !== '' && !preg_match('/^\d{1,3}(\.\d{1,3}){3}$/', $http)) {
+            return $http;
+        }
+        if (defined('CONTACT_FORM_FROM_EMAIL') && CONTACT_FORM_FROM_EMAIL !== '' && str_contains((string) CONTACT_FORM_FROM_EMAIL, '@')) {
+            $parts = explode('@', (string) CONTACT_FORM_FROM_EMAIL, 2);
+            return $parts[1] ?? 'localhost';
+        }
+        return 'localhost';
+    }
+
+    private function smtpTlsClientCryptoMethods(): int
+    {
+        $m = STREAM_CRYPTO_METHOD_TLS_CLIENT;
+        if (defined('STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT')) {
+            $m |= (int) STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT;
+        }
+        if (defined('STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT')) {
+            $m |= (int) STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT;
+        }
+        return $m;
     }
 
     private function smtpSend($socket, string $line): bool
@@ -212,6 +409,27 @@ class ContactController extends Controller
     {
         $written = @fwrite($socket, $data);
         return $written !== false;
+    }
+
+    /**
+     * Citește setarea SMTP din constantă (config) sau din mediu (ex. cPanel «Environment Variables»).
+     */
+    private function smtpConfigString(string $name): string
+    {
+        if (defined($name)) {
+            $c = constant($name);
+            $s = is_string($c) ? trim($c) : (string) $c;
+            if ($s !== '') {
+                return $s;
+            }
+        }
+
+        $v = getenv($name);
+        if ($v !== false && trim((string) $v) !== '') {
+            return trim((string) $v);
+        }
+
+        return '';
     }
 
     private function smtpAuthenticate($socket, string $username, string $password): bool

@@ -28,6 +28,8 @@ const ADMIN_USER = 'admin';
 const ADMIN_PASS = 'AAD1sup@$$';
 const CONTACT_FORM_FROM_EMAIL = 'contact@secretdoors.ro';
 const CONTACT_FORM_TO_EMAIL = 'sales@secretdoors.ro';
+// SMTP: folosește host-ul din cPanel (ex. mail.secretdoors.ro), nu neapărat domeniul gol.
+// Alternativ: variabile de mediu SMTP_HOST, SMTP_USERNAME, SMTP_PASSWORD pe server.
 const SMTP_HOST = '';
 const SMTP_PORT = 587;
 const SMTP_USERNAME = '';
