@@ -134,14 +134,7 @@ class ContactController extends Controller
                 }
             }
 
-            if (
-                !$this->smtpSend($socket, 'AUTH LOGIN') ||
-                !$this->smtpExpect($socket, [334]) ||
-                !$this->smtpSend($socket, base64_encode($username)) ||
-                !$this->smtpExpect($socket, [334]) ||
-                !$this->smtpSend($socket, base64_encode($password)) ||
-                !$this->smtpExpect($socket, [235])
-            ) {
+            if (!$this->smtpAuthenticate($socket, $username, $password)) {
                 return false;
             }
 
@@ -194,6 +187,32 @@ class ContactController extends Controller
     {
         $written = @fwrite($socket, $data);
         return $written !== false;
+    }
+
+    private function smtpAuthenticate($socket, string $username, string $password): bool
+    {
+        // Try AUTH LOGIN first (most common shared-hosting option).
+        if (
+            $this->smtpSend($socket, 'AUTH LOGIN') &&
+            $this->smtpExpect($socket, [334]) &&
+            $this->smtpSend($socket, base64_encode($username)) &&
+            $this->smtpExpect($socket, [334]) &&
+            $this->smtpSend($socket, base64_encode($password)) &&
+            $this->smtpExpect($socket, [235])
+        ) {
+            return true;
+        }
+
+        // Fallback: AUTH PLAIN for servers that do not support LOGIN.
+        $plain = base64_encode("\0" . $username . "\0" . $password);
+        if (
+            $this->smtpSend($socket, 'AUTH PLAIN ' . $plain) &&
+            $this->smtpExpect($socket, [235])
+        ) {
+            return true;
+        }
+
+        return false;
     }
 
     private function smtpExpect($socket, array $expectedCodes): bool
