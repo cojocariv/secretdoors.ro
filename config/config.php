@@ -28,6 +28,12 @@ const ADMIN_USER = 'admin';
 const ADMIN_PASS = 'AAD1sup@$$';
 const CONTACT_FORM_FROM_EMAIL = 'contact@secretdoors.ro';
 const CONTACT_FORM_TO_EMAIL = 'sales@secretdoors.ro';
+const SMTP_HOST = '';
+const SMTP_PORT = 587;
+const SMTP_USERNAME = '';
+const SMTP_PASSWORD = '';
+const SMTP_ENCRYPTION = 'tls'; // tls | ssl | none
+const SMTP_TIMEOUT = 12;
 
 $GLOBALS['site_contact'] = [
     'phone' => '0740992551',
