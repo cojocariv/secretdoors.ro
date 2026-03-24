@@ -26,6 +26,9 @@ const BASE_URL = '';
 const SITE_NAME = 'Secret Doors Premium';
 const ADMIN_USER = 'admin';
 const ADMIN_PASS = 'AAD1sup@$$';
+const CONTACT_FORM_TO_EMAIL = 'secretdoors.ro@gmail.com';
+const GCP_API_KEY = '';
+const GCP_CONTACT_ENDPOINT = '';
 
 $GLOBALS['site_contact'] = [
     'phone' => '0740992551',
