@@ -32,7 +32,7 @@
 </section>
 
 <section class="max-w-7xl mx-auto px-4 py-16">
-        <h2 class="text-2xl font-semibold mb-2">Produse în evidență</h2>
+        <h2 class="text-2xl font-semibold mb-2">Top Produse</h2>
     <div class="grid md:grid-cols-4 gap-6">
         <?php $show_price = true; ?>
         <?php foreach ($products as $product): ?>
