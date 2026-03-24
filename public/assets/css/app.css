@@ -6,6 +6,31 @@ html { scroll-behavior: smooth; }
   animation: heroKenburns 26s ease-in-out infinite alternate;
 }
 
+.hero-carousel .hero-slide {
+  opacity: 0;
+  animation:
+    heroCrossfade 20s linear infinite,
+    heroKenburns 20s ease-in-out infinite alternate;
+}
+
+@keyframes heroCrossfade {
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  24% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 @keyframes heroKenburns {
   from {
     transform: scale(1.06);
@@ -292,5 +317,9 @@ html { scroll-behavior: smooth; }
   .hero-bg-img {
     animation: none !important;
     transform: none !important;
+  }
+
+  .hero-carousel .hero-slide {
+    opacity: 1 !important;
   }
 }

@@ -1,20 +1,32 @@
-<section class="relative min-h-[92vh] flex items-center overflow-hidden">
+<?php
+$hero_slides = [
+    'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8084.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
+    'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8089.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
+    'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8091.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
+    'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8112.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
+];
+?>
+
+<section class="hero-carousel relative min-h-[92vh] flex items-center overflow-hidden">
     <div class="absolute inset-0 -z-10" aria-hidden="true">
-        <img
-            src="<?= e(hero_background_url()) ?>"
-            alt=""
-            width="2400"
-            height="1600"
-            class="hero-bg-img absolute inset-0 h-full w-full object-cover object-[center_28%]"
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-            sizes="100vw"
-        >
-        <!-- Contrast pentru text: întunecare spre stânga + jos -->
-        <div class="absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/80 to-zinc-950/25"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/70 via-transparent to-zinc-950/90"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(199,167,106,0.12),_transparent_55%)]"></div>
+        <?php foreach ($hero_slides as $index => $hero_url): ?>
+            <img
+                src="<?= e($hero_url) ?>"
+                alt=""
+                width="2400"
+                height="1600"
+                class="hero-bg-img hero-slide absolute inset-0 h-full w-full object-cover object-[center_28%]"
+                loading="<?= $index === 0 ? 'eager' : 'lazy' ?>"
+                fetchpriority="<?= $index === 0 ? 'high' : 'auto' ?>"
+                decoding="async"
+                sizes="100vw"
+                style="animation-delay: <?= e((string) ($index * 5)) ?>s;"
+            >
+        <?php endforeach; ?>
+        <div class="absolute inset-0 bg-gradient-to-r from-zinc-950/90 via-zinc-950/55 to-zinc-950/20"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/78 via-zinc-950/30 to-zinc-950/92"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(199,167,106,0.18),_transparent_54%)]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(49,73,120,0.16),_transparent_55%)]"></div>
     </div>
 
     <div class="relative z-10 max-w-7xl mx-auto w-full px-4 py-24 md:py-32">
