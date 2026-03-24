@@ -31,6 +31,9 @@ class ContactController extends Controller
         $to = defined('CONTACT_FORM_TO_EMAIL') && CONTACT_FORM_TO_EMAIL !== ''
             ? CONTACT_FORM_TO_EMAIL
             : site_contact('email');
+        $from = defined('CONTACT_FORM_FROM_EMAIL') && CONTACT_FORM_FROM_EMAIL !== ''
+            ? CONTACT_FORM_FROM_EMAIL
+            : $to;
         if ($to === '') {
             return false;
         }
@@ -55,21 +58,21 @@ class ContactController extends Controller
         $headers = [
             'MIME-Version: 1.0',
             'Content-Type: text/plain; charset=UTF-8',
-            'From: ' . SITE_NAME . ' <no-reply@' . ($_SERVER['HTTP_HOST'] ?? 'localhost') . '>',
+            'From: ' . SITE_NAME . ' <' . $from . '>',
         ];
         if ($safeReplyTo !== '') {
             $headers[] = 'Reply-To: ' . $safeReplyTo;
         }
         $headers[] = 'X-Mailer: PHP/' . PHP_VERSION;
 
-        if ($this->sendViaGcpEndpoint($payload, $to)) {
+        if ($this->sendViaGcpEndpoint($payload, $to, $from, $safeReplyTo)) {
             return true;
         }
 
         return @mail($to, $subject, $body, implode("\r\n", $headers));
     }
 
-    private function sendViaGcpEndpoint(array $payload, string $to): bool
+    private function sendViaGcpEndpoint(array $payload, string $to, string $from, string $replyTo): bool
     {
         if (!defined('GCP_CONTACT_ENDPOINT') || trim((string) GCP_CONTACT_ENDPOINT) === '') {
             return false;
@@ -85,6 +88,8 @@ class ContactController extends Controller
 
         $requestBody = [
             'to' => $to,
+            'from' => $from,
+            'replyTo' => $replyTo,
             'subject' => 'Mesaj nou din formularul de contact - ' . SITE_NAME,
             'name' => (string) $payload['name'],
             'email' => (string) $payload['email'],
