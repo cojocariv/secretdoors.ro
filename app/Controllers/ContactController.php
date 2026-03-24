@@ -65,55 +65,6 @@ class ContactController extends Controller
         }
         $headers[] = 'X-Mailer: PHP/' . PHP_VERSION;
 
-        if ($this->sendViaGcpEndpoint($payload, $to, $from, $safeReplyTo)) {
-            return true;
-        }
-
         return @mail($to, $subject, $body, implode("\r\n", $headers));
-    }
-
-    private function sendViaGcpEndpoint(array $payload, string $to, string $from, string $replyTo): bool
-    {
-        if (!defined('GCP_CONTACT_ENDPOINT') || trim((string) GCP_CONTACT_ENDPOINT) === '') {
-            return false;
-        }
-        if (!defined('GCP_API_KEY') || trim((string) GCP_API_KEY) === '') {
-            return false;
-        }
-
-        $endpoint = trim((string) GCP_CONTACT_ENDPOINT);
-        $apiKey = trim((string) GCP_API_KEY);
-        $separator = str_contains($endpoint, '?') ? '&' : '?';
-        $url = $endpoint . $separator . 'key=' . rawurlencode($apiKey);
-
-        $requestBody = [
-            'to' => $to,
-            'from' => $from,
-            'replyTo' => $replyTo,
-            'subject' => 'Mesaj nou din formularul de contact - ' . SITE_NAME,
-            'name' => (string) $payload['name'],
-            'email' => (string) $payload['email'],
-            'phone' => (string) $payload['phone'],
-            'message' => (string) $payload['message'],
-            'site' => SITE_NAME,
-        ];
-
-        $context = stream_context_create([
-            'http' => [
-                'method' => 'POST',
-                'header' => "Content-Type: application/json\r\nAccept: application/json\r\n",
-                'content' => json_encode($requestBody, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES),
-                'ignore_errors' => true,
-                'timeout' => 8,
-            ],
-        ]);
-
-        $result = @file_get_contents($url, false, $context);
-        if ($result === false) {
-            return false;
-        }
-
-        $statusLine = $http_response_header[0] ?? '';
-        return preg_match('#\s2\d\d\s#', $statusLine) === 1;
     }
 }
