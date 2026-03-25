@@ -2,8 +2,7 @@
     <div>
         <h1 class="text-3xl font-semibold">Contact</h1>
         <p class="text-zinc-300 mt-4 leading-7">
-            Pentru ofertă și preț uși invizibile / uși ascunse: uși filomuro fără pervaz, uși invizibile cu toc ascuns aluminiu și balamale ascunse uși.
-        Răspundem pentru București / România.
+            Pentru ofertă și preț uși invizibile / uși ascunse: uși filomuro fără pervaz, uși invizibile cu toc ascuns aluminiu și balamale ascunse uși în București, România.
         </p>
         <p class="text-zinc-300 mt-4"><?= e(site_contact('address')) ?></p>
         <p class="mt-2"><a href="tel:<?= e(site_contact('phone')) ?>"><?= e(site_contact('phone_display')) ?></a></p>
