@@ -171,8 +171,7 @@ document.querySelectorAll('[data-produse-tabs]').forEach((root) => {
  * Proiecte recente (prima casetă): carusel imagini la fiecare 3 secunde.
  */
 (() => {
-    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) return;
+    // Carusel pornit indiferent de preferința de reducere motion.
 
     document.querySelectorAll('[data-project-carousel]').forEach((root) => {
         const slides = root.querySelectorAll('img[data-project-carousel-slide]');
