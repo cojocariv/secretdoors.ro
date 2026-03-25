@@ -112,6 +112,9 @@ $category_cards = [
     </div>
 </section>
 
+<?php
+$why_section_card = 'select-none cursor-default bg-zinc-950/20 border border-zinc-800 rounded-2xl p-6 transition duration-300 ease-out motion-reduce:transition-none hover:-translate-y-1 motion-reduce:hover:translate-y-0 hover:border-accent/55 hover:bg-zinc-900/40 hover:shadow-[0_0_0_1px_rgba(199,167,106,0.12),0_20px_55px_rgba(0,0,0,0.45)]';
+?>
 <section class="max-w-7xl mx-auto px-4 py-16">
     <div class="mb-10">
         <h2 class="text-2xl md:text-3xl font-semibold flex flex-wrap items-baseline gap-x-2.5">
@@ -122,36 +125,36 @@ $category_cards = [
     </div>
 
     <div class="grid md:grid-cols-4 gap-6">
-        <div class="bg-zinc-950/20 border border-zinc-800 rounded-2xl p-6">
+        <div class="<?= $why_section_card ?>">
             <h3 class="font-semibold">Uși care dispar în perete</h3>
             <p class="text-zinc-400 text-sm mt-2 leading-6">Linii aliniate perfect la perete, balamale ascunse și muchii precise.</p>
         </div>
-        <div class="bg-zinc-950/20 border border-zinc-800 rounded-2xl p-6">
+        <div class="<?= $why_section_card ?>">
             <h3 class="font-semibold">Soluții la comandă</h3>
             <p class="text-zinc-400 text-sm mt-2 leading-6">Uși invizibile la comandă, finisaje premium și montaj asistat.</p>
         </div>
-        <div class="bg-zinc-950/20 border border-zinc-800 rounded-2xl p-6">
+        <div class="<?= $why_section_card ?>">
             <h3 class="font-semibold">Sisteme moderne pentru interior</h3>
             <p class="text-zinc-400 text-sm mt-2 leading-6">Plintă ascunsă, profile aluminiu și cornișă pentru lumină indirectă.</p>
         </div>
-        <div class="bg-zinc-950/20 border border-zinc-800 rounded-2xl p-6">
+        <div class="<?= $why_section_card ?>">
             <h3 class="font-semibold">București / România</h3>
             <p class="text-zinc-400 text-sm mt-2 leading-6">Livrare și instalare pentru apartamente și birouri.</p>
         </div>
     </div>
 
     <div class="mt-12 grid md:grid-cols-3 gap-6">
-        <div class="md:col-span-1 bg-zinc-950/20 border border-zinc-800 rounded-2xl p-6">
+        <div class="md:col-span-1 <?= $why_section_card ?>">
             <p class="text-zinc-400 text-sm">Client</p>
             <p class="text-white font-semibold mt-2">Arhitect • București</p>
             <p class="text-zinc-300 mt-4 leading-7">„Ușile ascunse arată firesc. Finisajul pare parte din perete.”</p>
         </div>
-        <div class="md:col-span-1 bg-zinc-950/20 border border-zinc-800 rounded-2xl p-6">
+        <div class="md:col-span-1 <?= $why_section_card ?>">
             <p class="text-zinc-400 text-sm">Client</p>
             <p class="text-white font-semibold mt-2">Designer • Rezidențial</p>
             <p class="text-zinc-300 mt-4 leading-7">„Îmbinări discrete, materiale premium, feronerie curată. Exact ce ne doream.”</p>
         </div>
-        <div class="md:col-span-1 bg-zinc-950/20 border border-zinc-800 rounded-2xl p-6">
+        <div class="md:col-span-1 <?= $why_section_card ?>">
             <p class="text-zinc-400 text-sm">Client</p>
             <p class="text-white font-semibold mt-2">Birou comercial</p>
             <p class="text-zinc-300 mt-4 leading-7">„Livrare și montaj rapide. Spațiul arată mult mai modern.”</p>
