@@ -11,7 +11,7 @@ $carouselImages = [
 ];
 ?>
 
-<article class="bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 flex flex-col h-full w-full min-w-0">
+<article class="bg-zinc-950/25 rounded-2xl overflow-hidden border border-zinc-800/70 flex flex-col h-full w-full min-w-0 hover:border-accent/70 hover:shadow-[0_0_0_1px_rgba(199,167,106,0.18),0_24px_70px_rgba(0,0,0,0.55)] transition shadow-sm backdrop-blur-[2px]">
     <?php if ($show_project_image_carousel): ?>
         <div class="relative h-56 w-full overflow-hidden" data-project-carousel data-interval="3000">
             <?php foreach ($carouselImages as $i => $imgUrl): ?>
