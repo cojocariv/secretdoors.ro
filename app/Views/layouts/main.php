@@ -51,7 +51,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= url('/assets/css/app.css') ?>">
+    <link rel="stylesheet" href="<?= url('/assets/css/app.css') ?>?v=<?= e(ASSET_VERSION) ?>">
 </head>
 <body class="bg-zinc-950 text-zinc-100 font-sans">
 <?php require __DIR__ . '/../components/header.php'; ?>
@@ -79,6 +79,6 @@ $schema = [
 <script type="application/ld+json">
 <?= json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?>
 </script>
-<script src="<?= url('/assets/js/app.js') ?>"></script>
+<script src="<?= url('/assets/js/app.js') ?>?v=<?= e(ASSET_VERSION) ?>"></script>
 </body>
 </html>
