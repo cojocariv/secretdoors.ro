@@ -24,6 +24,7 @@ const DB_DRIVER = 'mysql';
 
 const BASE_URL = '';
 const SITE_NAME = 'Secret Doors Premium';
+const SITE_DOMAIN = 'https://secretdoors.ro';
 const ADMIN_USER = 'admin';
 const ADMIN_PASS = 'AAD1sup@$$';
 const CONTACT_FORM_FROM_EMAIL = 'contact@secretdoors.ro';
