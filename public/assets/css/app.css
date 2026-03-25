@@ -1,5 +1,10 @@
 html { scroll-behavior: smooth; }
 
+/* Laptop: micșorăm scara ușor (redu că text/spacing par mari pe ecrane 15-16") */
+@media (min-width: 1024px) {
+  html { font-size: 14px; }
+}
+
 /* Hero homepage — zoom subtil (Ken Burns), dezactivat la prefers-reduced-motion */
 .hero-bg-img {
   transform: scale(1.06);
