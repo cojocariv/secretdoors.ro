@@ -85,12 +85,22 @@ html { scroll-behavior: smooth; }
   }
 }
 
-.brand-wordmark-inner .text-accent {
+.brand-wordmark-inner .text-accent,
+.brand-wordmark-inline .text-accent {
   background: linear-gradient(135deg, #d4b87c 0%, #c7a76a 45%, #a68b4a 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+}
+
+/* Același wordmark ca în header, pentru titluri în pagină (fără animația de încărcare cu opacity:0) */
+.brand-wordmark-inline {
+  font-family: 'Syne', system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fafafa;
+  display: inline-block;
 }
 
 .nav-reveal {

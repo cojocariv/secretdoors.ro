@@ -114,7 +114,10 @@ $category_cards = [
 
 <section class="max-w-7xl mx-auto px-4 py-16">
     <div class="mb-10">
-        <h2 class="text-2xl md:text-3xl font-semibold">De ce Secret Doors</h2>
+        <h2 class="text-2xl md:text-3xl font-semibold flex flex-wrap items-baseline gap-x-2.5">
+            <span>De ce</span>
+            <span class="brand-wordmark-inline tracking-tight">SECRET<span class="text-accent">DOORS</span></span>
+        </h2>
         <p class="text-zinc-400 text-sm mt-2 max-w-3xl">Pentru arhitecți, designeri și clienți exigenți: uși ascunse care păstrează arhitectura curată și fără întreruperi vizuale.</p>
     </div>
 
