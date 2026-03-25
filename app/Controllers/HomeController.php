@@ -15,7 +15,7 @@ class HomeController extends Controller
         $this->render('pages/home', [
             'title' => 'Acasă',
             'metaTitle' => 'Uși filomuro & uși invizibile | Secret Doors Premium',
-            'metaDescription' => 'Uși ascunse în perete, uși invizibile și uși filomuro la comandă. Producător uși filomuro Moldova/Chișinău și București. Preț & montaj.',
+            'metaDescription' => 'Uși ascunse în perete, uși invizibile și uși filomuro la comandă. Producător uși filomuro pentru București / România. Preț & montaj, instalare plintă ascunsă și profile LED perete.',
             'products' => $products,
             'projects' => $projects,
         ]);

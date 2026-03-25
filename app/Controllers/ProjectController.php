@@ -7,7 +7,7 @@ class ProjectController extends Controller
     {
         $type = $_GET['type'] ?? null;
         $metaTitle = 'Proiecte moderne: uși ascunse & uși invizibile | Secret Doors Premium';
-        $metaDescription = 'Proiecte cu design interior modern: uși integrate în perete, soluții moderne pereți și montaj uși filomuro. Arhitectură modernă interior.';
+        $metaDescription = 'Proiecte cu design interior modern pentru București: uși integrate în perete, soluții moderne pereți și montaj uși filomuro. Arhitectură modernă interior.';
         $this->render('pages/projects', [
             'title' => 'Proiecte',
             'metaTitle' => $metaTitle,

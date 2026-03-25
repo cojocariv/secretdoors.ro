@@ -2,7 +2,7 @@
     <h1 class="text-4xl font-semibold">Despre noi</h1>
     <p class="mt-6 text-zinc-300 max-w-3xl">
         Secret Doors produce uși filomuro și sisteme uși invizibile la comandă, pentru design interior modern.
-        Punem accent pe uși ascunse în perete, uși invizibile cu balamale ascunse și toc ascuns aluminiu, potrivite atât pentru apartamente, cât și pentru birouri în București / România și Moldova (Chișinău).
+        Punem accent pe uși ascunse în perete, uși invizibile cu balamale ascunse și toc ascuns aluminiu, potrivite atât pentru apartamente, cât și pentru birouri în București / România.
     </p>
 
     <div class="grid md:grid-cols-3 gap-6 mt-10">

@@ -28,7 +28,7 @@ class ProductController extends Controller
         $this->render('pages/products', [
             'title' => 'Produse',
             'metaTitle' => 'Produse: uși ascunse & uși invizibile | Secret Doors Premium',
-            'metaDescription' => 'Catalog uși ascunse, uși invizibile cu toc ascuns aluminiu și uși filomuro fără pervaz. Preț uși invizibile, montaj și livrare în România / Moldova.',
+            'metaDescription' => 'Catalog uși ascunse, uși invizibile cu toc ascuns aluminiu și uși filomuro fără pervaz. Preț uși invizibile, montaj și livrare în România / București. Plintă ascunsă și cornișă iluminare indirectă.',
             'products' => $products,
             'categoryFilters' => $categoryFilters,
             'selectedCategory' => $selectedCategory,

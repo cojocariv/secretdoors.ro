@@ -10,7 +10,7 @@ class ContactController extends Controller
         $this->render('pages/contact', [
             'title' => 'Contact',
             'metaTitle' => 'Contact: uși ascunse & uși invizibile | Secret Doors Premium',
-            'metaDescription' => 'Contact pentru uși ascunse în perete, uși invizibile personalizate și uși filomuro fără pervaz. Ofertă, preț și montaj în București / România și Chișinău / Moldova.',
+            'metaDescription' => 'Contact pentru uși ascunse în perete, uși invizibile personalizate și uși filomuro fără pervaz. Ofertă, preț și montaj în București / România.',
         ]);
     }
 
