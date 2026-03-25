@@ -171,5 +171,27 @@ document.querySelectorAll('[data-produse-tabs]').forEach((root) => {
  * Proiecte recente (prima casetă): carusel imagini la fiecare 3 secunde.
  */
 (() => {
-    // JS nu mai controlează caruselul; folosim CSS fallback (mai stabil).
+    document.querySelectorAll('[data-project-carousel]').forEach((root) => {
+        const slides = root.querySelectorAll('img[data-project-carousel-slide]');
+        if (!slides || slides.length < 2) return;
+
+        const intervalMs = parseInt(root.getAttribute('data-interval') || '3000', 10) || 3000;
+        let idx = 0;
+
+        const show = (i) => {
+            slides.forEach((s, k) => {
+                const on = k === i;
+                s.style.opacity = on ? '1' : '0';
+                s.style.pointerEvents = on ? 'auto' : 'none';
+            });
+        };
+
+        // Init: pornește vizibil primul slide
+        show(0);
+
+        setInterval(() => {
+            idx = (idx + 1) % slides.length;
+            show(idx);
+        }, intervalMs);
+    });
 })();
