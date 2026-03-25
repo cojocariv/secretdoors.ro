@@ -12,10 +12,12 @@ require_once $rootPath . '/core/Controller.php';
 require_once $rootPath . '/core/Router.php';
 require_once $rootPath . '/core/helpers.php';
 
-// SEO: robots.txt must be available even if routes/static files are not deployed correctly.
-// (Google fetch for robots.txt expects HTTP 200, not a routed 404.)
-$requestPathForRobots = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && $requestPathForRobots === '/robots.txt') {
+// SEO: robots.txt/sitemap.xml trebuie să răspundă mereu 200,
+// chiar dacă routes/static files nu sunt deployate cum trebuie.
+$requestPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
+$requestPath = '/' . ltrim($requestPath, '/'); // normalizează (fără dependență de subfolder)
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && str_ends_with($requestPath, '/robots.txt')) {
     header('Content-Type: text/plain; charset=UTF-8');
     $sitemapUrl = defined('SITE_DOMAIN') ? rtrim(SITE_DOMAIN, '/') . '/sitemap.xml' : '';
     echo "User-agent: *\n";
@@ -30,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $requestPathForRobots === '/robots.t
 }
 
 // SEO: sitemap.xml fallback direct (evită dependența de controller/routare în timpul deploy-ului).
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && $requestPathForRobots === '/sitemap.xml') {
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && str_ends_with($requestPath, '/sitemap.xml')) {
     header('Content-Type: application/xml; charset=UTF-8');
     $base = defined('SITE_DOMAIN') ? rtrim(SITE_DOMAIN, '/') : '';
     if ($base === '') {
