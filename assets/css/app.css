@@ -8,27 +8,23 @@ html { scroll-behavior: smooth; }
 /* Hero homepage — zoom subtil (Ken Burns), dezactivat la prefers-reduced-motion */
 .hero-bg-img {
   transform: scale(1.06);
-  animation: heroKenburns 26s ease-in-out infinite alternate;
 }
 
 .hero-carousel .hero-slide {
   opacity: 0;
   animation:
-    heroCrossfade 20s linear infinite,
-    heroKenburns 20s ease-in-out infinite alternate;
+    heroCrossfade 12s linear infinite,
+    heroKenburns 12s ease-in-out infinite alternate;
 }
 
 @keyframes heroCrossfade {
   0% {
-    opacity: 0;
-  }
-  5% {
     opacity: 1;
   }
-  24% {
+  25% {
     opacity: 1;
   }
-  30% {
+  26% {
     opacity: 0;
   }
   100% {

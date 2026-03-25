@@ -1,9 +1,9 @@
 <?php
 $hero_slides = [
-    'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8084.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
-    'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8089.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
-    'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8091.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
+    'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8085.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
+    'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8088.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
     'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8112.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
+    'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8114.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
 ];
 ?>
 
@@ -20,7 +20,7 @@ $hero_slides = [
                 fetchpriority="<?= $index === 0 ? 'high' : 'auto' ?>"
                 decoding="async"
                 sizes="100vw"
-                style="animation-delay: <?= e((string) ($index * 5)) ?>s;"
+                style="animation-delay: <?= e((string) ($index * 3)) ?>s;"
             >
         <?php endforeach; ?>
         <div class="absolute inset-0 bg-gradient-to-r from-zinc-950/90 via-zinc-950/55 to-zinc-950/20"></div>
