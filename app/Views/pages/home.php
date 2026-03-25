@@ -89,7 +89,7 @@ $category_cards = [
     </div>
 
     <div class="mt-12">
-        <h2 class="text-xl md:text-2xl font-semibold mb-4">Produse în evidență</h2>
+        <h2 class="text-xl md:text-2xl font-semibold mb-4">Produse TOP</h2>
         <div class="grid md:grid-cols-4 gap-6">
             <?php $show_price = true; ?>
             <?php foreach ($products as $product): ?>
@@ -101,7 +101,7 @@ $category_cards = [
 
 <section class="max-w-7xl mx-auto px-4 py-16">
     <div class="flex items-end justify-between mb-6">
-        <h2 class="text-2xl md:text-3xl font-semibold">Proiecte în evidență</h2>
+        <h2 class="text-2xl md:text-3xl font-semibold">Proiectele noastre</h2>
         <a href="<?= url('/proiecte') ?>" class="text-zinc-300">Vezi toate</a>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
