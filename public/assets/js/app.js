@@ -166,3 +166,34 @@ document.querySelectorAll('[data-produse-tabs]').forEach((root) => {
         if (event.key === 'Escape') closeMenu();
     });
 })();
+
+/**
+ * Proiecte recente (prima casetă): carusel imagini la fiecare 3 secunde.
+ */
+(() => {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+
+    document.querySelectorAll('[data-project-carousel]').forEach((root) => {
+        const slides = root.querySelectorAll('img[data-project-carousel-slide]');
+        if (!slides || slides.length < 2) return;
+
+        const intervalMs = parseInt(root.getAttribute('data-interval') || '3000', 10);
+        let idx = 0;
+
+        const show = (i) => {
+            slides.forEach((s, k) => {
+                const on = k === i;
+                s.classList.toggle('opacity-100', on);
+                s.classList.toggle('opacity-0', !on);
+            });
+        };
+
+        show(0);
+
+        setInterval(() => {
+            idx = (idx + 1) % slides.length;
+            show(idx);
+        }, intervalMs);
+    });
+})();

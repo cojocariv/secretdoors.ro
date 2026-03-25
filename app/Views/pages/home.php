@@ -66,7 +66,8 @@ $hero_slides = [
         <a href="<?= url('/proiecte') ?>" class="text-zinc-300">Vezi toate</a>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <?php foreach ($projects as $project): ?>
+        <?php foreach ($projects as $index => $project): ?>
+            <?php $show_project_image_carousel = ((int)$index === 0); ?>
             <?php require __DIR__ . '/../components/project-card.php'; ?>
         <?php endforeach; ?>
     </div>
