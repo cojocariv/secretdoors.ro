@@ -323,3 +323,27 @@ html { scroll-behavior: smooth; }
     opacity: 1 !important;
   }
 }
+
+/* Proiecte recente — carusel imagini (CSS fallback) */
+.project-carousel-anim {
+  animation-name: projectCarouselFade;
+  animation-duration: 15000ms; /* 5 poze x 3 sec */
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: opacity;
+}
+
+@keyframes projectCarouselFade {
+  0% {
+    opacity: 1;
+  }
+  19.999% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}

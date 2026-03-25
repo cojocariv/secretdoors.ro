@@ -19,8 +19,9 @@ $carouselImages = [
                     src="<?= e($imgUrl) ?>"
                     alt="<?= e($project['title'] ?? 'Proiect') ?>"
                     loading="<?= $i === 0 ? 'eager' : 'lazy' ?>"
-                    class="js-lightbox project-carousel-slide absolute inset-0 h-56 w-full object-cover cursor-zoom-in transition-opacity duration-700 ease-in-out <?= $i === 0 ? 'opacity-100' : 'opacity-0' ?>"
+                    class="js-lightbox project-carousel-slide project-carousel-anim absolute inset-0 h-56 w-full object-cover cursor-zoom-in <?= $i === 0 ? 'opacity-100' : 'opacity-0' ?>"
                     data-project-carousel-slide
+                    style="animation-delay: <?= (int) $i * 3 ?>s;"
                     tabindex="0"
                     role="button"
                     aria-label="Mărește imaginea"
