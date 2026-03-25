@@ -20,7 +20,5 @@
         </div>
     </div>
 
-    <div class="mt-12 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8">
-        
-    </div>
+    
 </section>
