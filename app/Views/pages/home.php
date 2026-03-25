@@ -43,7 +43,7 @@ $hero_slides = [
     </div>
 </section>
 
-<section class="max-w-7xl mx-auto px-4 -mt-6 pb-8">
+<section class="max-w-7xl mx-auto px-4 py-8">
     <p class="text-zinc-300/95 max-w-4xl text-base leading-7">
         Oferim uși ascunse în perete, uși invizibile cu balamale ascunse și uși filomuro fără pervaz, pentru design interior modern și stil minimalist.
         Producător uși filomuro pentru București / România: preț uși ascunse, uși invizibile la comandă, montaj și instalare plintă ascunsă.

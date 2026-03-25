@@ -21,8 +21,6 @@
     </div>
 
     <div class="mt-12 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 md:p-8">
-        <div class="grid md:grid-cols-2 gap-10 items-start">
-          
-        </div>
+        
     </div>
 </section>
