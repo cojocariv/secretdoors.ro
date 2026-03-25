@@ -5,9 +5,9 @@ html { scroll-behavior: smooth; }
   html { font-size: 14px; }
 }
 
-/* Hero homepage — crossfade lin între slide-uri (~1s blend), Ken Burns discret pentru claritate */
+/* Hero homepage — crossfade lin; 4 slide-uri × 6s; zoom Ken Burns minim */
 .hero-bg-img {
-  transform: translateZ(0) scale(1.04);
+  transform: translateZ(0) scale(1.01);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   image-rendering: auto;
@@ -17,22 +17,22 @@ html { scroll-behavior: smooth; }
 .hero-carousel .hero-slide {
   opacity: 0;
   animation:
-    heroCrossfade 12s cubic-bezier(0.4, 0, 0.2, 1) infinite,
-    heroKenburns 18s ease-in-out infinite alternate;
+    heroCrossfade 24s cubic-bezier(0.4, 0, 0.2, 1) infinite,
+    heroKenburns 24s ease-in-out infinite alternate;
 }
 
-/* 4 slide-uri × 3s fiecare: intrare lină, apăsare, ieșire lină cu suprapunere pentru crossfade */
+/* Ciclu 24s: ~6s pe slide (fade in / hold / fade out), decalate cu animation-delay: 6s × index */
 @keyframes heroCrossfade {
   0% {
     opacity: 0;
   }
-  8% {
+  4% {
     opacity: 1;
   }
-  24% {
+  22% {
     opacity: 1;
   }
-  32% {
+  27% {
     opacity: 0;
   }
   100% {
@@ -42,10 +42,10 @@ html { scroll-behavior: smooth; }
 
 @keyframes heroKenburns {
   from {
-    transform: translateZ(0) scale(1.04);
+    transform: translateZ(0) scale(1.01);
   }
   to {
-    transform: translateZ(0) scale(1.07);
+    transform: translateZ(0) scale(1.03);
   }
 }
 

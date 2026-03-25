@@ -20,7 +20,7 @@ $hero_slides = [
                 fetchpriority="<?= $index === 0 ? 'high' : ($index === 1 ? 'high' : 'auto') ?>"
                 decoding="<?= $index === 0 ? 'sync' : 'async' ?>"
                 sizes="100vw"
-                style="animation-delay: <?= e((string) ($index * 3)) ?>s;"
+                style="animation-delay: <?= e((string) ($index * 6)) ?>s;"
             >
         <?php endforeach; ?>
         <div class="absolute inset-0 bg-gradient-to-r from-zinc-950/90 via-zinc-950/55 to-zinc-950/20"></div>
