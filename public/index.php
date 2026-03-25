@@ -38,6 +38,7 @@ $router->get('/noutati', [BlogController::class, 'index']);
 $router->get('/noutati/articol', [BlogController::class, 'show']);
 $router->get('/contact', [ContactController::class, 'index']);
 $router->post('/contact', [ContactController::class, 'store']);
+$router->get('/robots.txt', [RobotsController::class, 'index']);
 $router->get('/sitemap.xml', [SitemapController::class, 'index']);
 
 $router->get('/admin/login', [AdminController::class, 'loginForm']);
