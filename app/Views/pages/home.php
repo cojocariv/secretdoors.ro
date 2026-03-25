@@ -30,15 +30,15 @@ $hero_slides = [
     </div>
 
     <div class="relative z-10 max-w-7xl mx-auto w-full px-4 py-24 md:py-32">
-        <p class="text-accent uppercase tracking-[0.38em] text-xs mb-5 drop-shadow-md animate-fadein">Invisible Doors. Perfect Architecture.</p>
+        <p class="text-accent uppercase tracking-[0.38em] text-xs mb-5 drop-shadow-md animate-fadein">Uși invizibile. Arhitectură impecabilă.</p>
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold max-w-3xl leading-[1.05] text-white drop-shadow-[0_4px_32px_rgba(0,0,0,0.45)]">
-            Premium filomuro systems for modern interiors.
+            Sisteme filomuro premium pentru interioare moderne.
         </h1>
         <p class="mt-7 text-zinc-100/95 max-w-2xl text-lg leading-relaxed drop-shadow-md">
-            Hidden doors that disappear into the wall: uși ascunse, uși invizibile la comandă, balamale ascunse și toc ascuns aluminiu.
+            Uși care dispar în perete: uși ascunse, uși invizibile la comandă, balamale ascunse și toc ascuns din aluminiu.
         </p>
         <a href="<?= url('/contact') ?>" class="inline-flex items-center gap-2 mt-10 px-7 py-3.5 rounded-sm font-medium shadow-lg bg-accent text-zinc-950 hover:brightness-110 transition duration-300">
-            Request a Quote
+            Solicită ofertă
             <span class="text-sm">→</span>
         </a>
     </div>
@@ -53,21 +53,21 @@ $hero_slides = [
 
 <?php
 $category_cards = [
-    ['title' => 'Hidden Doors', 'slug' => 'usi-invizibile', 'img' => $hero_slides[1] ?? $hero_slides[0], 'desc' => 'Uși invizibile, cu toc ascuns aluminiu și balamale ascunse.'],
-    ['title' => 'Flush / Filomuro', 'slug' => 'usi-filomuro', 'img' => $hero_slides[2] ?? $hero_slides[0], 'desc' => 'Uși filomuro fără pervaz: arhitectură curată și premium.'],
-    ['title' => 'Hidden Skirting Boards', 'slug' => 'profile', 'img' => $hero_slides[3] ?? $hero_slides[0], 'desc' => 'Plintă ascunsă și soluții moderne pereți.'],
-    ['title' => 'Aluminum Profiles', 'slug' => 'profile', 'img' => $hero_slides[0], 'desc' => 'Profile aluminiu interior, profile LED și detalii constructive.'],
-    ['title' => 'Cornices', 'slug' => 'cornisa', 'img' => $hero_slides[0], 'desc' => 'Cornisă modernă, cornișă iluminare indirectă și finishing.'],
+    ['title' => 'Uși ascunse', 'slug' => 'usi-invizibile', 'img' => $hero_slides[1] ?? $hero_slides[0], 'desc' => 'Uși invizibile, cu toc ascuns din aluminiu și balamale ascunse.'],
+    ['title' => 'Filomuro', 'slug' => 'usi-filomuro', 'img' => $hero_slides[2] ?? $hero_slides[0], 'desc' => 'Uși filomuro fără pervaz: linii curate, execuție premium.'],
+    ['title' => 'Plintă ascunsă', 'slug' => 'profile', 'img' => $hero_slides[3] ?? $hero_slides[0], 'desc' => 'Plintă ascunsă și soluții moderne pentru pereți.'],
+    ['title' => 'Profile aluminiu', 'slug' => 'profile', 'img' => $hero_slides[0], 'desc' => 'Profile de aluminiu pentru interior, profile LED și detalii constructive.'],
+    ['title' => 'Cornise', 'slug' => 'cornisa', 'img' => $hero_slides[0], 'desc' => 'Cornise moderne, iluminare indirectă și finisaje de calitate.'],
 ];
 ?>
 
 <section class="max-w-7xl mx-auto px-4 py-16">
     <div class="flex items-end justify-between mb-10">
         <div>
-            <h2 class="text-2xl md:text-3xl font-semibold">Category Collection</h2>
-            <p class="text-zinc-400 text-sm mt-2">Alege soluția: hidden doors, filomuro, plintă ascunsă, profile aluminiu și cornise.</p>
+            <h2 class="text-2xl md:text-3xl font-semibold">Categorii</h2>
+            <p class="text-zinc-400 text-sm mt-2">Alege soluția: uși ascunse, filomuro, plintă ascunsă, profile din aluminiu și cornise.</p>
         </div>
-        <a href="<?= url('/produse') ?>" class="text-accent hover:underline text-sm">View all products</a>
+        <a href="<?= url('/produse') ?>" class="text-accent hover:underline text-sm">Vezi toate produsele</a>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -89,7 +89,7 @@ $category_cards = [
     </div>
 
     <div class="mt-12">
-        <h2 class="text-xl md:text-2xl font-semibold mb-4">Featured Products</h2>
+        <h2 class="text-xl md:text-2xl font-semibold mb-4">Produse în evidență</h2>
         <div class="grid md:grid-cols-4 gap-6">
             <?php $show_price = true; ?>
             <?php foreach ($products as $product): ?>
@@ -101,7 +101,7 @@ $category_cards = [
 
 <section class="max-w-7xl mx-auto px-4 py-16">
     <div class="flex items-end justify-between mb-6">
-        <h2 class="text-2xl md:text-3xl font-semibold">Featured Projects</h2>
+        <h2 class="text-2xl md:text-3xl font-semibold">Proiecte în evidență</h2>
         <a href="<?= url('/proiecte') ?>" class="text-zinc-300">Vezi toate</a>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -114,21 +114,21 @@ $category_cards = [
 
 <section class="max-w-7xl mx-auto px-4 py-16">
     <div class="mb-10">
-        <h2 class="text-2xl md:text-3xl font-semibold">Why Secret Doors</h2>
-        <p class="text-zinc-400 text-sm mt-2 max-w-3xl">Crafted for architects, designers and premium clients: hidden doors that keep the architecture uninterrupted.</p>
+        <h2 class="text-2xl md:text-3xl font-semibold">De ce Secret Doors</h2>
+        <p class="text-zinc-400 text-sm mt-2 max-w-3xl">Pentru arhitecți, designeri și clienți exigenți: uși ascunse care păstrează arhitectura curată și fără întreruperi vizuale.</p>
     </div>
 
     <div class="grid md:grid-cols-4 gap-6">
         <div class="bg-zinc-950/20 border border-zinc-800 rounded-2xl p-6">
-            <h3 class="font-semibold">We create doors that disappear</h3>
-            <p class="text-zinc-400 text-sm mt-2 leading-6">Flush geometry, hidden hinges and clean edges.</p>
+            <h3 class="font-semibold">Uși care dispar în perete</h3>
+            <p class="text-zinc-400 text-sm mt-2 leading-6">Linii aliniate perfect la perete, balamale ascunse și muchii precise.</p>
         </div>
         <div class="bg-zinc-950/20 border border-zinc-800 rounded-2xl p-6">
-            <h3 class="font-semibold">Custom solutions</h3>
+            <h3 class="font-semibold">Soluții la comandă</h3>
             <p class="text-zinc-400 text-sm mt-2 leading-6">Uși invizibile la comandă, finisaje premium și montaj asistat.</p>
         </div>
         <div class="bg-zinc-950/20 border border-zinc-800 rounded-2xl p-6">
-            <h3 class="font-semibold">Modern interior systems</h3>
+            <h3 class="font-semibold">Sisteme moderne pentru interior</h3>
             <p class="text-zinc-400 text-sm mt-2 leading-6">Plintă ascunsă, profile aluminiu și cornișă pentru lumină indirectă.</p>
         </div>
         <div class="bg-zinc-950/20 border border-zinc-800 rounded-2xl p-6">
@@ -140,29 +140,29 @@ $category_cards = [
     <div class="mt-12 grid md:grid-cols-3 gap-6">
         <div class="md:col-span-1 bg-zinc-950/20 border border-zinc-800 rounded-2xl p-6">
             <p class="text-zinc-400 text-sm">Client</p>
-            <p class="text-white font-semibold mt-2">Architect • București</p>
-            <p class="text-zinc-300 mt-4 leading-7">“The hidden doors look effortless. The finish feels like part of the wall.”</p>
+            <p class="text-white font-semibold mt-2">Arhitect • București</p>
+            <p class="text-zinc-300 mt-4 leading-7">„Ușile ascunse arată firesc. Finisajul pare parte din perete.”</p>
         </div>
         <div class="md:col-span-1 bg-zinc-950/20 border border-zinc-800 rounded-2xl p-6">
             <p class="text-zinc-400 text-sm">Client</p>
             <p class="text-white font-semibold mt-2">Designer • Rezidențial</p>
-            <p class="text-zinc-300 mt-4 leading-7">“Minimal seams, premium materials, and clean hardware. Exactly what we wanted.”</p>
+            <p class="text-zinc-300 mt-4 leading-7">„Îmbinări discrete, materiale premium, feronerie curată. Exact ce ne doream.”</p>
         </div>
         <div class="md:col-span-1 bg-zinc-950/20 border border-zinc-800 rounded-2xl p-6">
             <p class="text-zinc-400 text-sm">Client</p>
-            <p class="text-white font-semibold mt-2">Commercial Office</p>
-            <p class="text-zinc-300 mt-4 leading-7">“Fast delivery and installation. The space now feels much more modern.”</p>
+            <p class="text-white font-semibold mt-2">Birou comercial</p>
+            <p class="text-zinc-300 mt-4 leading-7">„Livrare și montaj rapide. Spațiul arată mult mai modern.”</p>
         </div>
     </div>
 </section>
 
 <section class="max-w-7xl mx-auto px-4 pb-20">
     <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-10 text-center">
-        <h3 class="text-2xl md:text-3xl font-semibold">Request your quote</h3>
-        <p class="text-zinc-300 mt-3">Free consultation. Custom solutions for hidden doors, filomuro and premium interior systems.</p>
+        <h3 class="text-2xl md:text-3xl font-semibold">Solicită o ofertă personalizată</h3>
+        <p class="text-zinc-300 mt-3">Consultanță gratuită. Soluții la comandă pentru uși ascunse, filomuro și sisteme premium pentru interior.</p>
         <div class="mt-6 flex items-center justify-center gap-3 flex-wrap">
-            <a href="<?= url('/contact') ?>" class="inline-block px-6 py-3 bg-accent text-zinc-950 rounded-lg hover:brightness-110 transition">Request a Quote</a>
-            <a href="<?= url('/proiecte') ?>" class="inline-block px-6 py-3 border border-zinc-700 text-zinc-100 rounded-lg hover:border-accent transition">See Projects</a>
+            <a href="<?= url('/contact') ?>" class="inline-block px-6 py-3 bg-accent text-zinc-950 rounded-lg hover:brightness-110 transition">Solicită ofertă</a>
+            <a href="<?= url('/proiecte') ?>" class="inline-block px-6 py-3 border border-zinc-700 text-zinc-100 rounded-lg hover:border-accent transition">Vezi proiectele</a>
         </div>
     </div>
 </section>

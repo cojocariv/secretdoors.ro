@@ -62,9 +62,9 @@
 <a
     href="<?= url('/contact') ?>"
     class="fixed bottom-5 right-5 md:bottom-8 md:right-8 z-50 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-accent text-zinc-950 shadow-[0_10px_40px_rgba(0,0,0,0.55)] hover:brightness-110 transition"
-    aria-label="Request a Quote"
+    aria-label="Solicită ofertă"
 >
-    <span class="font-semibold">Request a Quote</span>
+    <span class="font-semibold">Solicită ofertă</span>
     <span aria-hidden="true">→</span>
 </a>
 
