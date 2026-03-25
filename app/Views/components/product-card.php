@@ -4,7 +4,7 @@ $show_price = $show_price ?? true;
 $img_src = normalize_image_url(trim((string) ($product['display_image'] ?? $product['image_url'] ?? '')));
 $has_image = $img_src !== '';
 ?>
-<article class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:-translate-y-1 transition shadow-sm flex flex-col h-full">
+<article class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden hover:-translate-y-1 transition shadow-sm flex flex-col h-full w-full min-w-0">
     <?php if ($has_image): ?>
     <img src="<?= e($img_src) ?>" alt="<?= e($product['name']) ?>" loading="lazy" class="js-lightbox h-56 w-full object-cover cursor-zoom-in flex-shrink-0" tabindex="0" role="button" aria-label="Mărește imaginea">
     <?php else: ?>
