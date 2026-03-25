@@ -12,6 +12,47 @@ require_once $rootPath . '/core/Controller.php';
 require_once $rootPath . '/core/Router.php';
 require_once $rootPath . '/core/helpers.php';
 
+// SEO: robots.txt must be available even if routes/static files are not deployed correctly.
+// (Google fetch for robots.txt expects HTTP 200, not a routed 404.)
+$requestPathForRobots = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && $requestPathForRobots === '/robots.txt') {
+    header('Content-Type: text/plain; charset=UTF-8');
+    $sitemapUrl = defined('SITE_DOMAIN') ? rtrim(SITE_DOMAIN, '/') . '/sitemap.xml' : '';
+    echo "User-agent: *\n";
+    echo "Allow: /\n\n";
+    echo "# Nu indexăm zona admin\n";
+    echo "Disallow: /admin/\n";
+    echo "\n";
+    if ($sitemapUrl !== '') {
+        echo "Sitemap: {$sitemapUrl}\n";
+    }
+    exit;
+}
+
+// SEO: sitemap.xml fallback direct (evită dependența de controller/routare în timpul deploy-ului).
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && $requestPathForRobots === '/sitemap.xml') {
+    header('Content-Type: application/xml; charset=UTF-8');
+    $base = defined('SITE_DOMAIN') ? rtrim(SITE_DOMAIN, '/') : '';
+    if ($base === '') {
+        echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        echo "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"></urlset>";
+        exit;
+    }
+    // Variantă minimă; versiunea completă e în SitemapController.
+    $now = date('c');
+    $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+    $xml .= "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
+    foreach (['/', '/produse', '/proiecte', '/despre-noi', '/noutati', '/contact'] as $path) {
+        $xml .= "  <url>\n";
+        $xml .= '    <loc>' . htmlspecialchars($base . $path, ENT_XML1 | ENT_QUOTES, 'UTF-8') . "</loc>\n";
+        $xml .= "    <lastmod>{$now}</lastmod>\n";
+        $xml .= "  </url>\n";
+    }
+    $xml .= "</urlset>";
+    echo $xml;
+    exit;
+}
+
 spl_autoload_register(static function (string $class) use ($rootPath): void {
     $paths = [
         $rootPath . '/app/Controllers/' . $class . '.php',
