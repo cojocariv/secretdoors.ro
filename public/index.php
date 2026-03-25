@@ -14,12 +14,18 @@ require_once $rootPath . '/core/helpers.php';
 
 // SEO: robots.txt/sitemap.xml trebuie să răspundă mereu 200,
 // chiar dacă routes/static files nu sunt deployate cum trebuie.
-$requestPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
-$requestPath = '/' . ltrim($requestPath, '/'); // normalizează (fără dependență de subfolder)
+$requestUri = (string) ($_SERVER['REQUEST_URI'] ?? '/');
+$requestPath = parse_url($requestUri, PHP_URL_PATH) ?? '';
+$requestPath = '/' . ltrim((string) $requestPath, '/'); // normalizează (fără dependență de subfolder)
+if ($requestPath === '/' && $requestUri !== '' && !str_contains($requestUri, '?')) {
+    // fallback: pe unele hosturi parse_url poate da ''/null pentru forme neobișnuite
+    $requestPath = '/' . ltrim($requestUri, '/');
+}
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && str_ends_with($requestPath, '/robots.txt')) {
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && (str_ends_with($requestPath, '/robots.txt') || str_ends_with($requestUri, 'robots.txt') || str_contains($requestUri, 'robots.txt'))) {
     header('Content-Type: text/plain; charset=UTF-8');
     $sitemapUrl = defined('SITE_DOMAIN') ? rtrim(SITE_DOMAIN, '/') . '/sitemap.xml' : '';
+    echo "# SEO-FALLBACK-ROBOTS\n";
     echo "User-agent: *\n";
     echo "Allow: /\n\n";
     echo "# Nu indexăm zona admin\n";
@@ -32,17 +38,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && str_ends_with($requestPath, '/robots
 }
 
 // SEO: sitemap.xml fallback direct (evită dependența de controller/routare în timpul deploy-ului).
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && str_ends_with($requestPath, '/sitemap.xml')) {
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && (str_ends_with($requestPath, '/sitemap.xml') || str_ends_with($requestUri, 'sitemap.xml') || str_contains($requestUri, 'sitemap.xml'))) {
     header('Content-Type: application/xml; charset=UTF-8');
     $base = defined('SITE_DOMAIN') ? rtrim(SITE_DOMAIN, '/') : '';
     if ($base === '') {
-        echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+        echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!-- SEO-FALLBACK-SITEMAP -->\n";
         echo "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\"></urlset>";
         exit;
     }
     // Variantă minimă; versiunea completă e în SitemapController.
     $now = date('c');
     $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+    $xml .= "<!-- SEO-FALLBACK-SITEMAP -->\n";
     $xml .= "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
     foreach (['/', '/produse', '/proiecte', '/despre-noi', '/noutati', '/contact'] as $path) {
         $xml .= "  <url>\n";

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Nu indexăm zona admin
+Disallow: /admin/
+
+Sitemap: https://secretdoors.ro/sitemap.xml
+
