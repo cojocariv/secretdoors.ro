@@ -35,3 +35,4 @@ uploads/
 
 # Project-specific
 /assets/logo.svg
+/config/config.php

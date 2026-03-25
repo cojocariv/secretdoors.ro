@@ -58,7 +58,7 @@ $hero_slides = [
         <h2 class="text-2xl font-semibold">Proiecte recente</h2>
         <a href="<?= url('/proiecte') ?>" class="text-zinc-300">Vezi toate</a>
     </div>
-    <div class="columns-1 md:columns-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <?php foreach ($projects as $project): ?>
             <?php require __DIR__ . '/../components/project-card.php'; ?>
         <?php endforeach; ?>
