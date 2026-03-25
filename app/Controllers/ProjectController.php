@@ -6,8 +6,12 @@ class ProjectController extends Controller
     public function index(): void
     {
         $type = $_GET['type'] ?? null;
+        $metaTitle = 'Proiecte moderne: uși ascunse & uși invizibile | Secret Doors Premium';
+        $metaDescription = 'Proiecte cu design interior modern: uși integrate în perete, soluții moderne pereți și montaj uși filomuro. Arhitectură modernă interior.';
         $this->render('pages/projects', [
             'title' => 'Proiecte',
+            'metaTitle' => $metaTitle,
+            'metaDescription' => $metaDescription,
             'projects' => (new Project())->all($type),
             'type' => $type,
         ]);
@@ -19,6 +23,14 @@ class ProjectController extends Controller
         if (!$project) {
             $this->redirect('/proiecte');
         }
-        $this->render('pages/project-detail', ['title' => $project['title'], 'project' => $project]);
+        $summary = (string) ($project['summary'] ?? '');
+        $this->render('pages/project-detail', [
+            'title' => $project['title'],
+            'project' => $project,
+            'metaTitle' => $project['title'] . ' | Secret Doors Premium',
+            'metaDescription' => $summary !== ''
+                ? $summary
+                : 'Proiect modern cu uși ascunse, uși invizibile și sisteme filomuro.',
+        ]);
     }
 }

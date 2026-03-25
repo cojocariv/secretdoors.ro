@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= e(($title ?? SITE_NAME) . ' | ' . SITE_NAME) ?></title>
-    <meta name="description" content="<?= e($metaDescription ?? 'Secret Doors — uși filomuro premium.') ?>">
+    <?php
+    $computedTitle = $metaTitle ?? (($title ?? SITE_NAME) . ' | ' . SITE_NAME);
+    $computedDescription = $metaDescription ?? 'Secret Doors — uși filomuro premium, uși ascunse și uși invizibile la comandă.';
+    $computedKeywords = $metaKeywords ?? (defined('SEO_KEYWORDS') ? SEO_KEYWORDS : '');
+    ?>
+    <title><?= e($computedTitle) ?></title>
+    <meta name="description" content="<?= e($computedDescription) ?>">
+    <?php if ($computedKeywords !== ''): ?>
+        <meta name="keywords" content="<?= e($computedKeywords) ?>">
+    <?php endif; ?>
     <?php
     // Canonical + OpenGraph (SEO). Preferăm domeniul din config, ca să nu depindem de hostul de pe local.
-    $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
-    $canonical = rtrim(SITE_DOMAIN, '/') . $requestUri;
+    $requestPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
+    $canonical = rtrim(SITE_DOMAIN, '/') . $requestPath;
 
-    $ogTitle = $title ?? SITE_NAME;
-    $ogDescription = $metaDescription ?? 'Secret Doors — uși filomuro premium.';
+    $ogTitle = $metaTitle ?? ($title ?? SITE_NAME);
+    $ogDescription = $computedDescription;
     $ogImage = $ogImage ?? hero_background_url();
 
     $robotsMeta = $robotsMeta ?? 'index,follow';

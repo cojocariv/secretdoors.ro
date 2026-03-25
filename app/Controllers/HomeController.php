@@ -14,7 +14,8 @@ class HomeController extends Controller
         $projects = array_slice((new Project())->all(), 0, 6);
         $this->render('pages/home', [
             'title' => 'Acasă',
-            'metaDescription' => 'Uși filomuro premium, proiecte moderne și soluții minimaliste.',
+            'metaTitle' => 'Uși filomuro & uși invizibile | Secret Doors Premium',
+            'metaDescription' => 'Uși ascunse în perete, uși invizibile și uși filomuro la comandă. Producător uși filomuro Moldova/Chișinău și București. Preț & montaj.',
             'products' => $products,
             'projects' => $projects,
         ]);
