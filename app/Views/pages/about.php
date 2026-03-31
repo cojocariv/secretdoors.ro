@@ -46,7 +46,7 @@
         <?php if (!empty($googleReviews)): ?>
             <?php
             $shownReviewsCount = count($googleReviews);
-            $allReviewsUrl = 'https://www.google.com/search?tbm=lcl&q=' . rawurlencode($googlePlaceName . ' recenzii');
+            $allReviewsUrl = 'https://www.google.com/search?q=secret+doors+romania&sca_esv=ec6fce200ec4408c&rlz=1C1CHBD_enMD903MD903&ei=WwrMaf71OoSL7NYPhNLX2Ak&ved=0ahUKEwi-j8fI2sqTAxWEBdsEHQTpFZsQ4dUDCBE&uact=5&oq=secret+doors+romania&gs_lp=Egxnd3Mtd2l6LXNlcnAiFHNlY3JldCBkb29ycyByb21hbmlhMgYQABgWGB4yBRAAGO8FMggQABiABBiiBDIFEAAY7wUyCBAAGIAEGKIESPUMUG5YrgxwAXgAkAEAmAFqoAGnBqoBAzIuNrgBA8gBAPgBAZgCCKAC6AXCAgoQABiwAxjWBBhHwgINEAAYgAQYsAMYQxiKBcICBRAAGIAEwgIKEAAYgAQYQxiKBcICCRAAGIAEGAoYC8ICBxAAGIAEGBPCAggQABgTGBYYHsICChAAGBMYFhgKGB7CAggQABgWGAoYHpgDAIgGAZAGCpIHAzEuN6AHtyWyBwMwLje4B-UFwgcDMC44yAcPgAgA&sclient=gws-wiz-serp#lrd=0x40b1f900401dad0f:0xd34621d140dcd32f,1,,,,';
             ?>
             <div class="mt-2 flex items-center justify-between gap-3 flex-wrap">
                 <p class="text-zinc-400 text-sm">
