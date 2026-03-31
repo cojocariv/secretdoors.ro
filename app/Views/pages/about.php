@@ -14,16 +14,19 @@
         Punem accent pe uși ascunse în perete, uși invizibile cu balamale ascunse și toc ascuns aluminiu, potrivite atât pentru apartamente, cât și pentru birouri în București / România.
     </p>
 
+    <?php
+    $aboutInfoCardClass = 'select-none cursor-default bg-zinc-900 border border-zinc-800 rounded-xl p-6 transition duration-300 ease-out motion-reduce:transition-none hover:-translate-y-1 motion-reduce:hover:translate-y-0 hover:border-accent/60 hover:bg-zinc-900/95 hover:shadow-[0_0_0_1px_rgba(199,167,106,0.14),0_20px_55px_rgba(0,0,0,0.48)]';
+    ?>
     <div class="grid md:grid-cols-3 gap-6 mt-10">
-        <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+        <div class="<?= $aboutInfoCardClass ?>">
             <h3 class="font-semibold">Avantaje competitive</h3>
             <p class="text-zinc-400 mt-2">Producție locală, uși premium interior la comandă, montaj uși filomuro asistat.</p>
         </div>
-        <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+        <div class="<?= $aboutInfoCardClass ?>">
             <h3 class="font-semibold">Proces de producție</h3>
             <p class="text-zinc-400 mt-2">Consultanță, proiectare, fabricație, livrare și instalare plintă ascunsă / profile LED perete.</p>
         </div>
-        <div class="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+        <div class="<?= $aboutInfoCardClass ?>">
             <h3 class="font-semibold">Calitate premium</h3>
             <p class="text-zinc-400 mt-2">Materiale verificate, uși filomuro fără pervaz și finisaje MDF, cornișă ascunsă.</p>
         </div>
