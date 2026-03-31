@@ -73,8 +73,16 @@ class PageController extends Controller
         $url = 'https://maps.googleapis.com/maps/api/place/details/json?' . $query;
         $payload = $this->httpGetJson($url);
 
-        if (!is_array($payload) || ($payload['status'] ?? '') !== 'OK' || !isset($payload['result']) || !is_array($payload['result'])) {
-            $result['error'] = 'Google reviews indisponibile: răspuns API invalid.';
+        if (!is_array($payload)) {
+            $result['error'] = 'Google reviews indisponibile: nu există răspuns JSON de la API.';
+            return $result;
+        }
+
+        $status = strtoupper(trim((string) ($payload['status'] ?? '')));
+        if ($status !== 'OK' || !isset($payload['result']) || !is_array($payload['result'])) {
+            $apiMessage = trim((string) ($payload['error_message'] ?? ''));
+            $statusText = $status !== '' ? $status : 'UNKNOWN_STATUS';
+            $result['error'] = 'Google reviews indisponibile: API status ' . $statusText . ($apiMessage !== '' ? ' — ' . $apiMessage : '');
             return $result;
         }
 
