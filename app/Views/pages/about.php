@@ -41,7 +41,28 @@
         </div>
 
         <?php if (!empty($googleReviews)): ?>
-            <p class="text-zinc-400 text-sm mt-2">Sincronizat automat din Google pentru <?= e($googlePlaceName) ?>.</p>
+            <?php
+            $shownReviewsCount = count($googleReviews);
+            $allReviewsUrl = 'https://www.google.com/search?tbm=lcl&q=' . rawurlencode($googlePlaceName . ' recenzii');
+            ?>
+            <div class="mt-2 flex items-center justify-between gap-3 flex-wrap">
+                <p class="text-zinc-400 text-sm">
+                    Sincronizat automat din Google pentru <?= e($googlePlaceName) ?>.
+                    <?php if ($googleRatingTotal > $shownReviewsCount): ?>
+                        API-ul Google afișează aici doar recenziile principale (<?= e((string) $shownReviewsCount) ?> din <?= e((string) $googleRatingTotal) ?>).
+                    <?php endif; ?>
+                </p>
+                <?php if ($googleRatingTotal > $shownReviewsCount): ?>
+                    <a
+                        href="<?= e($allReviewsUrl) ?>"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg border border-zinc-700 text-zinc-200 hover:border-accent/60 hover:text-accent transition"
+                    >
+                        Vezi toate recenziile pe Google
+                    </a>
+                <?php endif; ?>
+            </div>
             <div class="grid md:grid-cols-3 gap-6 mt-6">
                 <?php foreach ($googleReviews as $review): ?>
                     <?php
