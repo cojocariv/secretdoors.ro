@@ -31,16 +31,16 @@ const CONTACT_FORM_FROM_EMAIL = 'contact@secretdoors.ro';
 const CONTACT_FORM_TO_EMAIL = 'sales@secretdoors.ro';
 // SMTP: folosește host-ul din cPanel (ex. mail.secretdoors.ro), nu neapărat domeniul gol.
 // Alternativ: variabile de mediu SMTP_HOST, SMTP_USERNAME, SMTP_PASSWORD pe server.
-const SMTP_HOST = '';
-const SMTP_PORT = 587;
-const SMTP_USERNAME = '';
-const SMTP_PASSWORD = '';
+const SMTP_HOST = 'secretdoors.ro';
+const SMTP_PORT = 465;
+const SMTP_USERNAME = 'contact@secretdoors.ro';
+const SMTP_PASSWORD = '9xWhi490#';
 const SMTP_ENCRYPTION = 'tls'; // tls | ssl | none
 const SMTP_TIMEOUT = 12;
 
 // Google Reviews (Places API): completează din env sau direct în host.
-const GOOGLE_PLACES_API_KEY = '';
-const GOOGLE_PLACE_ID = '';
+const GOOGLE_PLACES_API_KEY = 'AIzaSyALuLdT8vjk54UDpdxdqrIrLM6ADulMNtg';
+const GOOGLE_PLACE_ID = 'ChIJD60dQAD5sUARL9PcQNEhRtM';
 const GOOGLE_REVIEWS_CACHE_TTL = 21600; // 6 ore
 
 // SEO keywords (meta "keywords" ajută mai puțin azi, dar le includem conform cerinței).
