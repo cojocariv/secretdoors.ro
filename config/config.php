@@ -38,6 +38,11 @@ const SMTP_PASSWORD = '';
 const SMTP_ENCRYPTION = 'tls'; // tls | ssl | none
 const SMTP_TIMEOUT = 12;
 
+// Google Reviews (Places API): completează din env sau direct în host.
+const GOOGLE_PLACES_API_KEY = '';
+const GOOGLE_PLACE_ID = '';
+const GOOGLE_REVIEWS_CACHE_TTL = 21600; // 6 ore
+
 // SEO keywords (meta "keywords" ajută mai puțin azi, dar le includem conform cerinței).
 // Listă curată, fără emoji și cu focus principal pe România/București.
 const SEO_KEYWORDS = 'uși ascunse, uși invizibile, uși filomuro, uși fără toc vizibil, uși moderne interior, uși minimaliste, uși premium interior, uși la comandă, producător uși filomuro, producător uși invizibile București, cumpără uși ascunse, comandă uși filomuro, uși invizibile la comandă, magazin uși filomuro, ofertă uși invizibile, preț uși ascunse, preț uși invizibile, uși filomuro livrare rapidă, instalare uși invizibile, uși ascunse în perete, uși invizibile cu balamale ascunse, uși filomuro fără pervaz, uși invizibile pentru design modern, uși ascunse pentru apartament, uși filomuro vopsite, uși invizibile personalizate, uși ascunse pentru birouri, uși filomuro cu finisaj MDF, uși invizibile cu toc ascuns aluminiu, plintă ascunsă, plintă filomuro, plintă invizibilă, plintă aluminiu, plintă modernă interior, plintă ascunsă București, plintă invizibilă București, profile decorative perete, profile aluminiu interior, profile aluminiu București, profile LED perete, profile LED perete București, cornișă ascunsă, cornișă modernă tavan, cornișă iluminare indirectă, cornișă iluminare indirectă București, profile pentru iluminare LED, design interior modern, stil minimalist interior, soluții moderne pereți, arhitectură modernă interior, finisaje premium interior, design pereți fără întreruperi, interior luxury modern, uși integrate în perete, sistem filomuro, toc ascuns aluminiu, balamale ascunse uși, sisteme uși invizibile, montaj uși filomuro, montaj uși invizibile București, instalare plintă ascunsă, instalare plintă ascunsă București, profile aluminiu anodizat, soluții constructive pereți, uși moderne România, uși filomuro România';
