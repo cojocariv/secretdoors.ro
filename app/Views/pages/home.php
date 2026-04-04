@@ -32,7 +32,7 @@ $hero_slides = [
     <div class="relative z-10 max-w-7xl mx-auto w-full px-4 py-24 md:py-32">
         <p class="text-accent uppercase tracking-[0.38em] text-xs mb-5 drop-shadow-md animate-fadein">Uși invizibile. Arhitectură impecabilă.</p>
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold max-w-3xl leading-[1.05] text-white drop-shadow-[0_4px_32px_rgba(0,0,0,0.45)]">
-            Sisteme filomuro premium pentru interioare moderne.
+            Uși filomuro premium pentru interioare moderne.
         </h1>
         <p class="mt-7 text-zinc-100/95 max-w-2xl text-lg leading-relaxed drop-shadow-md">
             Uși care dispar în perete: uși ascunse, uși invizibile la comandă, balamale ascunse și toc ascuns din aluminiu.
@@ -46,7 +46,7 @@ $hero_slides = [
 
 <section class="max-w-7xl mx-auto px-4 py-8">
     <p class="text-zinc-300/95 max-w-4xl text-base leading-7">
-        Oferim uși ascunse în perete, uși invizibile cu balamale ascunse și uși filomuro fără pervaz, pentru design interior modern și stil minimalist.
+        Producem uși ascunse în perete, uși invizibile cu balamale ascunse și uși filomuro fără pervaz, pentru design interior modern și stil minimalist.
         Producător uși filomuro pentru București / România: preț uși ascunse, uși invizibile la comandă, montaj și instalare plintă ascunsă.
     </p>
 </section>
