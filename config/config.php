@@ -25,6 +25,9 @@ const DB_DRIVER = 'mysql';
 const BASE_URL = '';
 const SITE_NAME = 'Secret Doors Premium';
 const SITE_DOMAIN = 'https://secretdoors.ro';
+
+/** URL absolut HTTPS pentru preview la partajare (Viber, WhatsApp, Facebook). Gol = folosește hero local sau fallback. */
+const OG_IMAGE_URL = 'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8075.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D';
 const ADMIN_USER = 'admin';
 const ADMIN_PASS = 'AAD1sup@$$';
 const CONTACT_FORM_FROM_EMAIL = 'contact@secretdoors.ro';

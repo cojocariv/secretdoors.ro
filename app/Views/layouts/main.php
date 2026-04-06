@@ -20,7 +20,7 @@
 
     $ogTitle = $metaTitle ?? ($title ?? SITE_NAME);
     $ogDescription = $computedDescription;
-    $ogImage = $ogImage ?? hero_background_url();
+    $ogImage = $ogImage ?? og_default_image_url();
 
     $robotsMeta = $robotsMeta ?? 'index,follow';
     ?>

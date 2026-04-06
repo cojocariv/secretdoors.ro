@@ -193,6 +193,28 @@ function hero_background_url(): string
 }
 
 /**
+ * Imagine Open Graph / Twitter: explicit din config sau hero; URL absolut pentru crawlers.
+ */
+function og_default_image_url(): string
+{
+    if (defined('OG_IMAGE_URL') && is_string(OG_IMAGE_URL) && OG_IMAGE_URL !== '') {
+        return OG_IMAGE_URL;
+    }
+
+    $img = hero_background_url();
+    if (preg_match('#^https?://#i', $img)) {
+        return $img;
+    }
+
+    $base = rtrim(SITE_DOMAIN, '/');
+    if ($img !== '' && $img[0] === '/') {
+        return $base . $img;
+    }
+
+    return $base . '/' . $img;
+}
+
+/**
  * URL public pentru catalog PDF în Profile (nume fișier cu spații acceptat).
  */
 function asset_profile_catalog_pdf_url(): ?string
