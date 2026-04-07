@@ -13,12 +13,23 @@ $has_image = $img_src !== '';
     <div class="p-5 flex flex-col flex-1">
         <h3 class="text-lg font-semibold"><?= e($product['name']) ?></h3>
         <p class="text-zinc-400 text-sm mt-2"><?= e($product['short_description']) ?></p>
-        <div class="mt-auto flex items-center">
+        <?php
+        $orderQuery = http_build_query([
+            'pid' => (int) ($product['id'] ?? 0),
+            'produs' => (string) ($product['name'] ?? ''),
+        ], '', '&', PHP_QUERY_RFC3986);
+        $orderHref = url('/contact') . ($orderQuery !== '' ? '?' . $orderQuery : '') . '#formular-contact';
+        ?>
+        <div class="mt-auto pt-4 flex flex-col gap-3">
             <?php if ($show_price): ?>
                 <span class="text-accent font-semibold"><?= number_format((float)$product['price'], 0, ',', '.') ?> RON</span>
-            <?php else: ?>
-                <span></span>
             <?php endif; ?>
+            <a
+                href="<?= e($orderHref) ?>"
+                class="inline-flex items-center justify-center w-full px-4 py-2.5 rounded-lg bg-accent text-zinc-950 font-medium text-sm hover:brightness-110 transition border border-accent/80"
+            >
+                Comandă
+            </a>
         </div>
     </div>
 </article>

@@ -7,10 +7,21 @@ class ContactController extends Controller
 
     public function index(): void
     {
+        $prefillMessage = '';
+        $produs = trim((string) ($_GET['produs'] ?? ''));
+        $pid = (int) ($_GET['pid'] ?? 0);
+        if ($produs !== '') {
+            $prefillMessage = 'Bună ziua, doresc să comand / o ofertă pentru produsul: ' . $produs . '.';
+            if ($pid > 0) {
+                $prefillMessage .= "\n\n(ID produs: {$pid})";
+            }
+        }
+
         $this->render('pages/contact', [
             'title' => 'Contact',
             'metaTitle' => 'Contact: uși ascunse & uși invizibile | Secret Doors Premium',
             'metaDescription' => 'Contact pentru uși ascunse în perete, uși invizibile personalizate și uși filomuro fără pervaz. Ofertă, preț și montaj în București / România.',
+            'prefillContactMessage' => $prefillMessage,
         ]);
     }
 

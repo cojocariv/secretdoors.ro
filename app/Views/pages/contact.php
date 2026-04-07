@@ -11,13 +11,14 @@
             <iframe class="w-full h-full" loading="lazy" src="<?= e(site_contact('google_maps_embed')) ?>"></iframe>
         </div>
     </div>
-    <div class="bg-zinc-900 p-6 rounded-2xl border border-zinc-800">
+    <div id="formular-contact" class="bg-zinc-900 p-6 rounded-2xl border border-zinc-800 scroll-mt-24">
         <?php if (!empty($_SESSION['flash'])): ?><p class="text-accent mb-4"><?= e($_SESSION['flash']); unset($_SESSION['flash']); ?></p><?php endif; ?>
+        <?php $prefillContactMessage = $prefillContactMessage ?? ''; ?>
         <form method="post" action="<?= url('/contact') ?>" class="space-y-4">
             <input required name="name" placeholder="Nume" class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2">
             <input required type="email" name="email" placeholder="Email" class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2">
             <input name="phone" placeholder="Telefon" class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2">
-            <textarea required name="message" placeholder="Mesaj" rows="5" class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2"></textarea>
+            <textarea required name="message" placeholder="Mesaj" rows="5" class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2"><?= e($prefillContactMessage) ?></textarea>
             <button class="bg-accent text-zinc-950 px-5 py-3 rounded-lg">Trimite mesaj</button>
         </form>
     </div>
