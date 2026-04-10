@@ -245,6 +245,17 @@ function normalize_image_url(string $rawUrl): string
     }
 
     $host = strtolower($parts['host'] ?? '');
+    // Azure Blob: multe imagini sunt salvate cu SAS token (sig/se/sp) care expiră.
+    // Dacă URL-ul are host blob.core.windows.net, preferăm varianta stabilă fără query.
+    // Funcționează când containerul este public (cazul uzual pentru gallery assets).
+    if (str_contains($host, 'blob.core.windows.net')) {
+        $path = $parts['path'] ?? '';
+        if ($path !== '') {
+            $scheme = $parts['scheme'] ?? 'https';
+            return $scheme . '://' . $host . $path;
+        }
+    }
+
     if (!str_contains($host, 'drive.google.com')) {
         return $rawUrl;
     }
