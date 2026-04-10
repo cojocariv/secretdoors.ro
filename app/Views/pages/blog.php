@@ -7,7 +7,7 @@
     <div class="grid md:grid-cols-3 gap-6">
         <?php foreach ($articles as $article): ?>
             <article class="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden">
-                <img src="<?= e($article['cover_image']) ?>" alt="<?= e($article['title']) ?>" loading="lazy" class="h-52 w-full object-cover">
+                <img src="<?= e(normalize_image_url((string) ($article['cover_image'] ?? ''))) ?>" alt="<?= e($article['title']) ?>" loading="lazy" class="h-52 w-full object-cover">
                 <div class="p-5">
                     <h2 class="font-semibold"><?= e($article['title']) ?></h2>
                     <p class="text-zinc-400 text-sm mt-2"><?= e($article['excerpt']) ?></p>

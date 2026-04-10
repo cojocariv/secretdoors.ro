@@ -9,11 +9,11 @@ class BlogController extends Controller
     private function decorateArticle(array $article): array
     {
         $galleryImages = [
-            'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_7929.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
-            'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8019.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
-            'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8072.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
-            'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8073.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
-            'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8074.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
+            'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_7929.JPG',
+            'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8019.JPG',
+            'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8072.JPG',
+            'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8073.JPG',
+            'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8074.JPG',
         ];
 
         $slug = (string) ($article['slug'] ?? '');

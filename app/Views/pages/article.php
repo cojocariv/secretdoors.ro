@@ -13,7 +13,7 @@ $paragraphs = preg_split("/\R\R+/", trim($body)) ?: [];
     </a>
 
     <img
-        src="<?= e((string) ($article['cover_image'] ?? '')) ?>"
+        src="<?= e(normalize_image_url((string) ($article['cover_image'] ?? ''))) ?>"
         alt="<?= e($article['title'] ?? '') ?>"
         class="w-full h-96 object-cover rounded-2xl"
         loading="lazy"
