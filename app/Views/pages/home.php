@@ -1,9 +1,9 @@
 <?php
 $hero_slides = [
-    'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8085.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
-    'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8088.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
-    'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8112.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
-    'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8114.JPG?sp=racwdl&st=2026-03-23T17:46:49Z&se=2026-04-10T01:01:49Z&sv=2024-11-04&sr=c&sig=p%2FEGIMcr6%2BTlfBYLMP6cuEpsCQTEJjUf8FwVc%2BT0n58%3D',
+    'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8085.JPG',
+    'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8088.JPG',
+    'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8112.JPG',
+    'https://cojocaristorage.blob.core.windows.net/secretdoors/usi/IMG_8114.JPG',
 ];
 ?>
 
@@ -11,7 +11,7 @@ $hero_slides = [
     <div class="absolute inset-0 -z-10" aria-hidden="true">
         <?php foreach ($hero_slides as $index => $hero_url): ?>
             <img
-                src="<?= e($hero_url) ?>"
+                src="<?= e(normalize_image_url($hero_url)) ?>"
                 alt=""
                 width="2400"
                 height="1600"
